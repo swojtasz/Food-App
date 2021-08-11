@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import { auth } from "../config/firebase";
 import { RootState } from "../store";
 
-const CourierRoute: React.FC = (props) => {
+const CourierRoute: React.FC<{ userType: string }> = (props) => {
     const userType = useSelector((state: RootState) => state.auth.userType);
 
     if (!auth.currentUser && userType === "courier") {

@@ -3,8 +3,8 @@ import classes from "./styles.module.css";
 import { useDispatch } from "react-redux";
 import { useRef, useState } from "react";
 import { useHistory } from "react-router";
-import { loadingActions } from "../../store/loading-slice";
 import { auth } from "../../config/firebase";
+import { authActions } from "../../store/auth-slice";
 
 const LoginForm: React.FC = () => {
     const emailRef = useRef<HTMLInputElement>(null);
@@ -25,10 +25,11 @@ const LoginForm: React.FC = () => {
             password: passwordRef.current!.value,
         };
 
-        dispatch(loadingActions.setIsLoading(true));
+        dispatch(authActions.setIsLoading(true));
 
         auth.signInWithEmailAndPassword(loginProps.email, loginProps.password)
             .then((result) => {
+                dispatch(authActions.setIsLoading(false));
                 history.push("/");
             })
             .catch((error) => {

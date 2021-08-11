@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import { auth } from "../config/firebase";
 import { RootState } from "../store";
 
-const ClientRoute: React.FC = (props) => {
+const ClientRoute: React.FC<{ userType: string }> = (props) => {
     const userType = useSelector((state: RootState) => state.auth.userType);
 
     if (!auth.currentUser && userType === "client") {

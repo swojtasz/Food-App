@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { RootState } from "../../../store";
 import ShowMenuItem from "../ShowMenuItem/ShowMenuItem";
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
-import { loadingActions } from "../../../store/loading-slice";
 import { db } from "../../../config/firebase";
 
 type MenuItem = {
@@ -24,9 +23,10 @@ const ShowMenu: React.FC = () => {
     const dispatch = useDispatch();
 
     const [menu, setMenu] = useState<MenuItem[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        dispatch(loadingActions.setIsLoading(true));
+        setIsLoading(true);
         const database = db.ref();
 
         console.log("aa");
@@ -36,22 +36,21 @@ const ShowMenu: React.FC = () => {
             .get()
             .then((snapshot) => {
                 if (snapshot.exists()) {
-                    console.log(snapshot.val());
-                    //         const menuArray: MenuItem[] = [];
-                    //         for (const key in snapshot.val()) {
-                    //             menuArray.push({
-                    //                 name: key,
-                    //                 description: snapshot.val()[key].description,
-                    //                 price: snapshot.val()[key].price,
-                    //             });
-                    //         }
-                    //         setMenu(menuArray);
-                    dispatch(loadingActions.setIsLoading(false));
+                    const menuArray: MenuItem[] = [];
+                    for (const key in snapshot.val()) {
+                        menuArray.push({
+                            name: key,
+                            description: snapshot.val()[key].description,
+                            price: snapshot.val()[key].price,
+                        });
+                    }
+                    setMenu(menuArray);
+                    setIsLoading(false);
                 }
             })
             .catch((error) => {
                 console.log(error);
-                dispatch(loadingActions.setIsLoading(false));
+                setIsLoading(false);
             });
     }, [restaurantName, dispatch]);
 
@@ -59,7 +58,9 @@ const ShowMenu: React.FC = () => {
 
     let index = 0;
 
-    if (menu.length !== 0) {
+    if (isLoading) {
+        return <LoadingSpinner />;
+    } else if (menu.length !== 0) {
         menuList = menu.map((item) => {
             index++;
             return <ShowMenuItem key={item.name} item={item} index={index} />;

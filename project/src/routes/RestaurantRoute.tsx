@@ -1,12 +1,12 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import RestaurantView from "../pages/main-views/RestaurantView/RestaurantView";
 import AddMenuItem from "../pages/restaurant/AddMenuItem";
 import ShowMenu from "../pages/restaurant/ShowMenu";
 
 const RestaurantRoute: React.FC = (props) => {
     return (
-        <>
+        <Switch>
             <Route path="/" exact>
                 <RestaurantView />
             </Route>
@@ -16,7 +16,10 @@ const RestaurantRoute: React.FC = (props) => {
             <Route path="/showMenu" exact>
                 <ShowMenu />
             </Route>
-        </>
+            <Route path="*">
+                <Redirect to="/" />
+            </Route>
+        </Switch>
     );
 };
 

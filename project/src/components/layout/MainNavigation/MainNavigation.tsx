@@ -6,21 +6,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { orderActions } from "../../../store/order-slice";
 import { auth } from "../../../config/firebase";
-import { loadingActions } from "../../../store/loading-slice";
+import { authActions } from "../../../store/auth-slice";
 
 const MainNavigation: React.FC = () => {
-    const isLoading = useSelector(
-        (state: RootState) => state.loading.isLoading
-    );
+    const isLoading = useSelector((state: RootState) => state.auth.isLoading);
     const dispatch = useDispatch();
     const history = useHistory();
 
     const logoutHandler = () => {
-        dispatch(loadingActions.setIsLoading(true));
+        dispatch(authActions.setIsLoading(true));
         auth.signOut()
             .then(() => {
                 dispatch(orderActions.reset());
-                dispatch(loadingActions.setIsLoading(false));
+                dispatch(authActions.setIsLoading(false));
                 history.push("/");
             })
             .catch((error) => {

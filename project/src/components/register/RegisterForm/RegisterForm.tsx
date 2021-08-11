@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 
 import { auth, db } from "../../../config/firebase";
 import { useDispatch } from "react-redux";
-import { loadingActions } from "../../../store/loading-slice";
+import { authActions } from "../../../store/auth-slice";
 
 const RegisterForm: React.FC<{ type: string }> = (props) => {
     const emailRef = useRef<HTMLInputElement>(null);
@@ -26,7 +26,7 @@ const RegisterForm: React.FC<{ type: string }> = (props) => {
             phoneNumber: phoneNumberRef.current!.value,
         };
 
-        dispatch(loadingActions.setIsLoading(true));
+        dispatch(authActions.setIsLoading(true));
 
         auth.createUserWithEmailAndPassword(
             registrationProps.email,
@@ -47,7 +47,7 @@ const RegisterForm: React.FC<{ type: string }> = (props) => {
                     });
             })
             .then(() => {
-                dispatch(loadingActions.setIsLoading(false));
+                dispatch(authActions.setIsLoading(false));
                 history.push("/");
             })
             .catch(() => {

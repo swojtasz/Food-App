@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Login from "../pages/login/Login";
 import NotLoggedView from "../pages/main-views/NotLoggedView/NotLoggedView";
 import Register from "../pages/registration/Register/Register";
@@ -9,7 +9,7 @@ import RegisterRestaurant from "../pages/registration/RegisterRestaurant/Registe
 
 const AuthRoute: React.FC = (props) => {
     return (
-        <>
+        <Switch>
             <Route path="/" exact>
                 <NotLoggedView />
             </Route>
@@ -28,7 +28,10 @@ const AuthRoute: React.FC = (props) => {
             <Route path="/register/restaurant" exact>
                 <RegisterRestaurant />
             </Route>
-        </>
+            <Route path="*">
+                <Redirect to="/" />
+            </Route>
+        </Switch>
     );
 };
 

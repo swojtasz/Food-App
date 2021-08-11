@@ -5,6 +5,7 @@ const authSlice = createSlice({
     initialState: {
         user: "",
         userType: "",
+        isLoading: true,
     },
     reducers: {
         setUser(state, action) {
@@ -12,6 +13,9 @@ const authSlice = createSlice({
         },
         setUserType(state, action) {
             state.userType = action.payload;
+        },
+        setIsLoading(state, action) {
+            state.isLoading = action.payload;
         },
     },
 });

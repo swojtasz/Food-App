@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 
 import { useDispatch } from "react-redux";
 import { auth, db } from "../../../config/firebase";
-import { loadingActions } from "../../../store/loading-slice";
+import { authActions } from "../../../store/auth-slice";
 
 const RestaurantForm: React.FC = () => {
     const nameRef = useRef<HTMLInputElement>(null);
@@ -32,7 +32,7 @@ const RestaurantForm: React.FC = () => {
             address: addressRef.current!.value,
         };
 
-        dispatch(loadingActions.setIsLoading(true));
+        dispatch(authActions.setIsLoading(true));
 
         auth.createUserWithEmailAndPassword(
             registrationProps.email,
@@ -53,7 +53,7 @@ const RestaurantForm: React.FC = () => {
                     });
             })
             .then(() => {
-                dispatch(loadingActions.setIsLoading(false));
+                dispatch(authActions.setIsLoading(false));
                 history.push("/");
             })
             .catch(() => {

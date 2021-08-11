@@ -1,17 +1,15 @@
 import classes from "./styles.module.css";
 
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { auth, db } from "../../../config/firebase";
-import { loadingActions } from "../../../store/loading-slice";
+import { db } from "../../../config/firebase";
 
 const AddMenuItemForm: React.FC<{ setPopup: () => void }> = (props) => {
     const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [price, setPrice] = useState<string>("");
-
-    const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(false);
 
     const onSetName = (name: React.ChangeEvent<HTMLInputElement>) => {
         setName(name.target.value);
@@ -34,7 +32,7 @@ const AddMenuItemForm: React.FC<{ setPopup: () => void }> = (props) => {
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
 
-        dispatch(loadingActions.setIsLoading(true));
+        setIsLoading(true);
         const database = db.ref();
 
         database
@@ -49,7 +47,7 @@ const AddMenuItemForm: React.FC<{ setPopup: () => void }> = (props) => {
                 console.log(error);
             });
 
-        dispatch(loadingActions.setIsLoading(false));
+        setIsLoading(false);
 
         if (isError === null) {
             props.setPopup();
@@ -84,7 +82,9 @@ const AddMenuItemForm: React.FC<{ setPopup: () => void }> = (props) => {
                     onChange={onSetPrice}
                     value={price}
                 />
-                <button type="submit">Dodaj</button>
+                <button type="submit" disabled={isLoading}>
+                    Dodaj
+                </button>
             </form>
         </>
     );
