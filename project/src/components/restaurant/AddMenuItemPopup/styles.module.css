@@ -1,0 +1,30 @@
+.modal {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.modalContent {
+    background-color: white;
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    padding: 20px;
+    width: 25rem;
+    border-radius: 5px;
+    border: 2px solid black;
+    font-weight: bolder;
+    color: black;
+}
+
+.modalContent button {
+    font: inherit;
+    background-color: #05386b;
+    border: 1px solid #05386b;
+    color: white;
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}

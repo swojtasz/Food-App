@@ -41,12 +41,12 @@ const RestaurantForm: React.FC = () => {
             .then((result) => {
                 result
                     .user!.updateProfile({
-                        displayName: "restaurant",
+                        displayName: registrationProps.name,
                     })
                     .catch(() => {
                         setError("Failed to update profile!");
                     });
-                db.ref(`users/restaurant/${result.user!.uid}`)
+                db.ref(`users/restaurant/${registrationProps.name}`)
                     .set(registrationProps)
                     .catch((error) => {
                         setError("Failed to push user to Database!");
@@ -54,7 +54,7 @@ const RestaurantForm: React.FC = () => {
             })
             .then(() => {
                 dispatch(loadingActions.setIsLoading(false));
-                history.push("/login");
+                history.push("/");
             })
             .catch(() => {
                 setError("Failed to sign up with email and password!");

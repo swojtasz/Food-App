@@ -48,7 +48,7 @@ const RegisterForm: React.FC<{ type: string }> = (props) => {
             })
             .then(() => {
                 dispatch(loadingActions.setIsLoading(false));
-                history.push("/login");
+                history.push("/");
             })
             .catch(() => {
                 setError("Failed to sign up with email and password!");

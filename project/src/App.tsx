@@ -1,94 +1,52 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Layout from "./components/layout/Layout/Layout";
-
 import { auth } from "./config/firebase";
-import Login from "./pages/login/Login";
-import Register from "./pages/registration/Register/Register";
-import RegisterClient from "./pages/registration/RegisterClient/RegisterClient";
-import RegisterCourier from "./pages/registration/RegisterCourier/RegisterCourier";
-import RegisterRestaurant from "./pages/registration/RegisterRestaurant/RegisterRestaurant";
+
+import Layout from "./components/layout/Layout/Layout";
+import AuthRoute from "./routes/AuthRoute";
 import { RootState } from "./store";
 import { authActions } from "./store/auth-slice";
 import { loadingActions } from "./store/loading-slice";
+import LoadingSpinner from "./UI/LoadingSpinner/LoadingSpinner";
+import ClientRoute from "./routes/ClientRoute";
+import CourierRoute from "./routes/CourierRoute";
+import RestaurantRoute from "./routes/RestaurantRoute";
 
 function App() {
     const dispatch = useDispatch();
-    const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+    const isLoading = useSelector(
+        (state: RootState) => state.loading.isLoading
+    );
     const userType = useSelector((state: RootState) => state.auth.userType);
 
-    // useEffect(() => {
-    //     const getDatabaseProfile = () => {
-    //         const database = db.ref();
-    //         if (auth.currentUser) {
-    //             database
-    //                 .child("users/")
-    //                 .child(`${auth.currentUser.displayName!}/`)
-    //                 .child(auth.currentUser.uid)
-    //                 .get()
-    //                 .then((snapshot) => {
-    //                     if (snapshot.exists()) {
-    //                         dispatch(authActions.setUser(snapshot.val()));
-    //                         dispatch(authActions.login());
-    //                     }
-    //                     dispatch(loadingActions.setIsLoading(false));
-    //                 })
-    //                 .catch((error: any) => {
-    //                     console.error(error);
-    //                 });
-    //         }
-    //     };
-
-    // auth.onAuthStateChanged((user) => {
-    //     if (user) {
-    //         getDatabaseProfile();
-    //     } else {
-    //         dispatch(loadingActions.setIsLoading(false));
-    //     }
-    // });
-    // }, [dispatch]);
-
-    auth.onAuthStateChanged((user) => {
-        if (user) {
-            if (auth.currentUser?.displayName === null) {
-                auth.signOut();
-                dispatch(loadingActions.setIsLoading(false));
-                return;
-            }
+    useEffect(() => {
+        auth.onAuthStateChanged((user) => {
             dispatch(authActions.setUserType(auth.currentUser?.displayName));
-            dispatch(authActions.login());
-        }
-        dispatch(loadingActions.setIsLoading(false));
-    });
-
-    const isNotLogged = !isLoggedIn && (
-        <Switch>
-            <Route path="/login" exact>
-                <Login />
-            </Route>
-            <Route path="/register" exact>
-                <Register />
-            </Route>
-            <Route path="/register/client" exact>
-                <RegisterClient />
-            </Route>
-            <Route path="/register/courier" exact>
-                <RegisterCourier />
-            </Route>
-            <Route path="/register/restaurant" exact>
-                <RegisterRestaurant />
-            </Route>
-        </Switch>
-    );
+            dispatch(loadingActions.setIsLoading(false));
+        });
+    }, [dispatch]);
 
     return (
         <Layout>
-            <Switch>
-                {isNotLogged}
-                <Route path="*">
-                    <Redirect to="/" />
-                </Route>
-            </Switch>
+            {isLoading && <LoadingSpinner />}
+            {!isLoading && (
+                <Switch>
+                    {!auth.currentUser && <AuthRoute />}
+                    {auth.currentUser && userType === "client" && (
+                        <ClientRoute />
+                    )}
+                    {auth.currentUser && userType === "courier" && (
+                        <CourierRoute />
+                    )}
+                    {auth.currentUser &&
+                        userType !== "client" &&
+                        userType !== "courier" && <RestaurantRoute />}
+                    <Route path="*">
+                        <Redirect to="/" />
+                    </Route>
+                </Switch>
+            )}
         </Layout>
     );
 }

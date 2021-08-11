@@ -5,30 +5,30 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "../../../store";
 import { orderActions } from "../../../store/order-slice";
-import { authActions } from "../../../store/auth-slice";
 import { auth } from "../../../config/firebase";
+import { loadingActions } from "../../../store/loading-slice";
 
 const MainNavigation: React.FC = () => {
-    const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
     const isLoading = useSelector(
         (state: RootState) => state.loading.isLoading
     );
     const dispatch = useDispatch();
     const history = useHistory();
 
-    if (isLoggedIn) {
-        const logoutHandler = () => {
-            auth.signOut()
-                .then(() => {
-                    dispatch(authActions.logout());
-                    dispatch(orderActions.reset());
-                    history.push("/");
-                })
-                .catch((error) => {
-                    console.log("error mainNav");
-                });
-        };
+    const logoutHandler = () => {
+        dispatch(loadingActions.setIsLoading(true));
+        auth.signOut()
+            .then(() => {
+                dispatch(orderActions.reset());
+                dispatch(loadingActions.setIsLoading(false));
+                history.push("/");
+            })
+            .catch((error) => {
+                console.log("error mainNav");
+            });
+    };
 
+    if (auth.currentUser) {
         return (
             <nav className={classes.nav}>
                 <NavLink to="/" activeClassName={classes.active} exact>

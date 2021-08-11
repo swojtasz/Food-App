@@ -1,0 +1,11 @@
+.meals {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+    color: white;
+}
+
+.meals ul {
+    padding: 1.2rem;
+    margin: 0;
+}
