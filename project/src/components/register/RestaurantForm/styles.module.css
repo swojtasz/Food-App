@@ -1,0 +1,50 @@
+.form {
+    margin: auto;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+    width: 25rem;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    background-color: white;
+    font-size: 1.2rem;
+}
+
+.control {
+    margin-bottom: 0.5rem;
+}
+
+.control label {
+    display: block;
+    color: black;
+    margin-bottom: 0.5rem;
+}
+
+.control input {
+    display: block;
+    width: 20rem;
+    margin: auto;
+    border-radius: 4px;
+    padding: 0.25rem;
+    border: 1px solid #ccc;
+}
+
+.form button {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    width: 7rem;
+    height: 2.5rem;
+    margin-top: 0.5rem;
+    text-decoration: none;
+    color: white;
+    background: #0a7b79;
+    transition: 0.4s;
+    border: none;
+    font-size: small;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.form button:hover {
+    color: black;
+}
