@@ -34,6 +34,9 @@ function App() {
             {!isLoading && !!auth.currentUser && userType === "client" && (
                 <ClientRoute />
             )}
+            {!isLoading && !!auth.currentUser && userType === "courier" && (
+                <CourierRoute />
+            )}
         </Layout>
     );
 }
