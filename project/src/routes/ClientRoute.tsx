@@ -1,17 +1,22 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { auth } from "../config/firebase";
-import { RootState } from "../store";
+import { Redirect, Route, Switch } from "react-router-dom";
+import ShowMenuItem from "../pages/client/ShowMenuItem";
+import ClientView from "../pages/main-views/ClientView/ClientView";
 
-const ClientRoute: React.FC<{ userType: string }> = (props) => {
-    const userType = useSelector((state: RootState) => state.auth.userType);
-
-    if (!auth.currentUser && userType === "client") {
-        return <Redirect to="/login" />;
-    }
-
-    return <>{props.children}</>;
+const ClientRoute: React.FC = (props) => {
+    return (
+        <Switch>
+            <Route path="/" exact>
+                <ClientView />
+            </Route>
+            <Route path="/showMenuItem/:id">
+                <ShowMenuItem />
+            </Route>
+            <Route path="*">
+                <Redirect to="/" />
+            </Route>
+        </Switch>
+    );
 };
 
 export default ClientRoute;

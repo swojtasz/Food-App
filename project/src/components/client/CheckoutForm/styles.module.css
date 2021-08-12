@@ -1,0 +1,45 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    margin-top: 2rem;
+}
+
+.form label {
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+}
+
+.form input {
+    width: max-content;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    border-color: black;
+}
+
+.form button {
+    font: inherit;
+    background-color: #05386b;
+    border: none;
+    color: white;
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: small;
+}
+
+.form .bottom {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form p {
+    color: darkred;
+    align-items: center;
+    margin: 1rem auto;
+}

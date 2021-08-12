@@ -31,11 +31,11 @@ function App() {
                 !!auth.currentUser &&
                 userType !== "client" &&
                 userType !== "courier" && <RestaurantRoute />}
+            {!isLoading && !!auth.currentUser && userType === "client" && (
+                <ClientRoute />
+            )}
         </Layout>
     );
 }
 
 export default App;
-
-/* <ClientRoute userType={userType} />
-    <CourierRoute userType={userType} /> */
