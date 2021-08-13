@@ -17,10 +17,7 @@ const ClientView: React.FC = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        const database = db.ref();
-
-        database
-            .child("users/restaurant")
+        db.ref("menu")
             .get()
             .then((snapshot) => {
                 if (snapshot.exists()) {
@@ -34,7 +31,9 @@ const ClientView: React.FC = () => {
                             );
                         }
                         restaurantArray.push({
-                            name: restaurantKey,
+                            name: snapshot.val()[restaurantKey].info
+                                .restaurantName,
+                            id: restaurantKey,
                             menu: menuArray,
                         });
                     }

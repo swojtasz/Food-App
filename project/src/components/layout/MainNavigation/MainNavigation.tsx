@@ -4,7 +4,6 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "../../../store";
-import { orderActions } from "../../../store/order-slice";
 import { auth } from "../../../config/firebase";
 import { authActions } from "../../../store/auth-slice";
 
@@ -17,8 +16,6 @@ const MainNavigation: React.FC = () => {
         dispatch(authActions.setIsLoading(true));
         auth.signOut()
             .then(() => {
-                dispatch(orderActions.reset());
-                dispatch(authActions.setIsLoading(false));
                 history.push("/");
             })
             .catch((error) => {

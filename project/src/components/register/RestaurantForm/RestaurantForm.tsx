@@ -23,37 +23,38 @@ const RestaurantForm: React.FC = () => {
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
 
+        const password = passwordRef.current!.value;
+
         const registrationProps = {
             name: nameRef.current!.value,
             email: emailRef.current!.value,
-            password: passwordRef.current!.value,
             phoneNumber: phoneNumberRef.current!.value,
             city: cityRef.current!.value,
             address: addressRef.current!.value,
+            userType: "restaurant",
         };
 
         dispatch(authActions.setIsLoading(true));
 
-        auth.createUserWithEmailAndPassword(
-            registrationProps.email,
-            registrationProps.password
-        )
+        auth.createUserWithEmailAndPassword(registrationProps.email, password)
             .then((result) => {
-                result
-                    .user!.updateProfile({
-                        displayName: registrationProps.name,
-                    })
-                    .catch(() => {
-                        setError("Failed to update profile!");
-                    });
-                db.ref(`users/restaurant/${registrationProps.name}`)
+                db.ref(`users/${result.user!.uid}`)
                     .set(registrationProps)
+                    .catch((error) => {
+                        setError("Failed to push user to Database!");
+                    });
+                db.ref(`menu/${result.user!.uid}/info`)
+                    .set({
+                        restaurantAddress: registrationProps.address,
+                        restaurantCity: registrationProps.city,
+                        restaurantPhone: registrationProps.phoneNumber,
+                        restaurantName: registrationProps.name,
+                    })
                     .catch((error) => {
                         setError("Failed to push user to Database!");
                     });
             })
             .then(() => {
-                dispatch(authActions.setIsLoading(false));
                 history.push("/");
             })
             .catch(() => {

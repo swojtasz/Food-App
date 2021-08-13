@@ -20,34 +20,24 @@ const RegisterForm: React.FC<{ type: string }> = (props) => {
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
 
+        const password = passwordRef.current!.value;
         const registrationProps = {
             email: emailRef.current!.value,
-            password: passwordRef.current!.value,
             phoneNumber: phoneNumberRef.current!.value,
+            userType: props.type,
         };
 
         dispatch(authActions.setIsLoading(true));
 
-        auth.createUserWithEmailAndPassword(
-            registrationProps.email,
-            registrationProps.password
-        )
+        auth.createUserWithEmailAndPassword(registrationProps.email, password)
             .then((result) => {
-                result
-                    .user!.updateProfile({
-                        displayName: props.type,
-                    })
-                    .catch(() => {
-                        setError("Failed to update profile!");
-                    });
-                db.ref(`users/${props.type}/${result.user!.uid}`)
+                db.ref(`users/${result.user!.uid}`)
                     .set(registrationProps)
                     .catch((error) => {
                         setError("Failed to push user to Database!");
                     });
             })
             .then(() => {
-                dispatch(authActions.setIsLoading(false));
                 history.push("/");
             })
             .catch(() => {

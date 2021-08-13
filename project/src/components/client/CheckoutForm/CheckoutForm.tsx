@@ -2,17 +2,25 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import { db } from "../../../config/firebase";
 import { Order } from "../../../types/Order";
+import { RestaurantInfo } from "../../../types/RestaurantInfo";
 import classes from "./styles.module.css";
 
-const CheckoutForm: React.FC<{ closePopup: () => void; order: Order[] }> = (
-    props
-) => {
+const CheckoutForm: React.FC<{
+    closePopup: () => void;
+    order: Order[];
+    restaurantInfo: RestaurantInfo;
+}> = (props) => {
     const [isError, setIsError] = useState<string | null>(null);
+    const [city, setCity] = useState<string>("");
     const [address, setAddress] = useState<string>("");
     const [phoneNumber, setPhoneNumber] = useState<string>("");
     const [isLoading, setIsLoading] = useState(false);
 
     const history = useHistory();
+
+    const onSetCity = (city: React.ChangeEvent<HTMLInputElement>) => {
+        setCity(city.target.value);
+    };
 
     const onSetAddress = (address: React.ChangeEvent<HTMLInputElement>) => {
         setAddress(address.target.value);
@@ -25,6 +33,10 @@ const CheckoutForm: React.FC<{ closePopup: () => void; order: Order[] }> = (
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
 
+        if (city.trim().length === 0) {
+            setIsError("Błąd! Podaj miasto dostawy"!);
+            return;
+        }
         if (address.trim().length === 0) {
             setIsError("Błąd! Podaj adres dostawy"!);
             return;
@@ -35,14 +47,17 @@ const CheckoutForm: React.FC<{ closePopup: () => void; order: Order[] }> = (
         }
 
         setIsLoading(true);
-        const database = db.ref();
-
-        database
-            .child(`orders`)
+        db.ref(`orders`)
             .push({
-                order: props.order,
-                address: address,
-                phoneNumber: phoneNumber,
+                orderInfo: {
+                    order: props.order,
+                    restaurantInfo: props.restaurantInfo,
+                },
+                clientInfo: {
+                    city: city,
+                    address: address,
+                    phoneNumber: phoneNumber,
+                },
             })
             .then(() => {
                 console.log("Udalo sie zamowic jedzenie!");
@@ -61,6 +76,15 @@ const CheckoutForm: React.FC<{ closePopup: () => void; order: Order[] }> = (
 
     return (
         <form className={classes.form} onSubmit={formSubmitHandler}>
+            <div>
+                <label htmlFor="city">Miasto dostawy:</label>
+                <input
+                    type="text"
+                    id="city"
+                    onChange={onSetCity}
+                    value={city}
+                />
+            </div>
             <div>
                 <label htmlFor="address">Adres dostawy:</label>
                 <input

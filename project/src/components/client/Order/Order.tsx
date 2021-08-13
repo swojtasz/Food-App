@@ -6,8 +6,9 @@ import { RootState } from "../../../store";
 import { orderActions } from "../../../store/order-slice";
 import { useState } from "react";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
+import { RestaurantInfo } from "../../../types/RestaurantInfo";
 
-const Order: React.FC = () => {
+const Order: React.FC<{ restaurantInfo: RestaurantInfo }> = (props) => {
     const dispatch = useDispatch();
     const [isCheckouting, setIsCheckouting] = useState<boolean>(false);
 
@@ -43,6 +44,7 @@ const Order: React.FC = () => {
                 {isCheckouting && (
                     <CheckoutForm
                         order={ordersArray}
+                        restaurantInfo={props.restaurantInfo}
                         closePopup={handleClosePopup}
                     />
                 )}

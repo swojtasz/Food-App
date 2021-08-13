@@ -10,7 +10,7 @@ const ShowMenu: React.FC<{ restaurants: Restaurant[] }> = (props) => {
     restaurantNames = props.restaurants.map((item) => {
         return (
             <li key={item.name}>
-                <Link to={`/showMenuItem/${item.name}`}>{item.name}</Link>
+                <Link to={`/showMenuItem/${item.id}`}>{item.name}</Link>
             </li>
         );
     });

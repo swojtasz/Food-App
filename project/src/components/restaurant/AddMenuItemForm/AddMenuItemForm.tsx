@@ -1,9 +1,7 @@
 import classes from "./styles.module.css";
 
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
-import { db } from "../../../config/firebase";
+import { auth, db } from "../../../config/firebase";
 
 const AddMenuItemForm: React.FC<{ setPopup: () => void }> = (props) => {
     const [name, setName] = useState<string>("");
@@ -25,18 +23,12 @@ const AddMenuItemForm: React.FC<{ setPopup: () => void }> = (props) => {
 
     const [isError, setIsError] = useState<string | null>(null);
 
-    const restaurantName = useSelector(
-        (state: RootState) => state.auth.userType
-    );
-
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
 
         setIsLoading(true);
-        const database = db.ref();
 
-        database
-            .child(`users/restaurant/${restaurantName}/menu/${name}`)
+        db.ref(`menu/${auth.currentUser?.uid}/menu/${name}`)
             .set({
                 name: name,
                 description: description,

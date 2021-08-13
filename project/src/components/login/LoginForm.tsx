@@ -29,7 +29,6 @@ const LoginForm: React.FC = () => {
 
         auth.signInWithEmailAndPassword(loginProps.email, loginProps.password)
             .then((result) => {
-                dispatch(authActions.setIsLoading(false));
                 history.push("/");
             })
             .catch((error) => {

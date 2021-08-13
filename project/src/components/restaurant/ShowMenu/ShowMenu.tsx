@@ -1,42 +1,25 @@
 import classes from "./styles.module.css";
 
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { RootState } from "../../../store";
 import ShowMenuItem from "../ShowMenuItem/ShowMenuItem";
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
-import { db } from "../../../config/firebase";
-
-type MenuItem = {
-    name: string;
-    description: string;
-    price: string;
-};
+import { auth, db } from "../../../config/firebase";
+import { Menu } from "../../../types/Menu";
 
 const ShowMenu: React.FC = () => {
-    const restaurantName = useSelector(
-        (state: RootState) => state.auth.userType
-    );
-
-    const dispatch = useDispatch();
-
-    const [menu, setMenu] = useState<MenuItem[]>([]);
+    const [menu, setMenu] = useState<Menu[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
-        const database = db.ref();
 
-        console.log("aa");
-
-        database
-            .child(`users/restaurant/${restaurantName}/menu`)
+        db.ref(`menu/${auth.currentUser?.uid}/menu`)
             .get()
             .then((snapshot) => {
                 if (snapshot.exists()) {
-                    const menuArray: MenuItem[] = [];
+                    const menuArray: Menu[] = [];
                     for (const key in snapshot.val()) {
                         menuArray.push({
                             name: key,
@@ -45,14 +28,13 @@ const ShowMenu: React.FC = () => {
                         });
                     }
                     setMenu(menuArray);
-                    setIsLoading(false);
                 }
             })
             .catch((error) => {
                 console.log(error);
-                setIsLoading(false);
             });
-    }, [restaurantName, dispatch]);
+        setIsLoading(false);
+    }, []);
 
     let menuList: JSX.Element | JSX.Element[] = <LoadingSpinner />;
 
