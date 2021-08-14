@@ -8,12 +8,14 @@ type Order = {
         price: number;
         quantity: number;
     }[];
+    refetchList: boolean;
 };
 
 const initialState: Order = {
     popup: false,
     totalPrice: 0,
     order: [],
+    refetchList: false,
 };
 
 const orderSlice = createSlice({
@@ -58,6 +60,9 @@ const orderSlice = createSlice({
                 state.order[itemIndex].quantity--;
                 state.totalPrice -= action.payload.price;
             }
+        },
+        setRefetchList(state, action) {
+            state.refetchList = action.payload;
         },
     },
 });

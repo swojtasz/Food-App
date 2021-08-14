@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 import { Menu } from "../../../types/Menu";
 import { Restaurant } from "../../../types/Restaurant";
@@ -11,8 +10,6 @@ import { db } from "../../../config/firebase";
 const ClientView: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-
-    const dispatch = useDispatch();
 
     useEffect(() => {
         setIsLoading(true);
@@ -45,7 +42,7 @@ const ClientView: React.FC = () => {
                 console.log(error);
                 setIsLoading(false);
             });
-    }, [dispatch]);
+    }, []);
 
     return (
         <>

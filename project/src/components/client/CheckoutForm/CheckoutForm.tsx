@@ -58,6 +58,8 @@ const CheckoutForm: React.FC<{
                     address: address,
                     phoneNumber: phoneNumber,
                 },
+                status: "active",
+                responsibleCourier: "",
             })
             .then(() => {
                 console.log("Udalo sie zamowic jedzenie!");

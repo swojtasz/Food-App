@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import ShowMenuItemComponent from "../../components/client/ShowMenuItem/ShowMenuItem";
@@ -16,8 +15,6 @@ const ShowMenuItem: React.FC = () => {
 
     const params = useParams<{ id?: string }>();
     const { id } = params;
-
-    const dispatch = useDispatch();
 
     useEffect(() => {
         setIsLoading(true);
@@ -39,7 +36,7 @@ const ShowMenuItem: React.FC = () => {
                 console.log(error);
                 setIsLoading(false);
             });
-    }, [dispatch, id]);
+    }, [id]);
 
     if (isLoading) {
     }
