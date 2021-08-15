@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { auth, db } from "../../../config/firebase";
-import { orderActions } from "../../../store/order-slice";
-import { OrderInfo } from "../../../types/OrderInfo";
+import { auth, db } from "../../../../config/firebase";
+import { orderActions } from "../../../../store/order-slice";
+import { OrderInfo } from "../../../../types/OrderInfo";
 import classes from "./styles.module.css";
 
 const OrderItem: React.FC<{ order: OrderInfo }> = (props) => {

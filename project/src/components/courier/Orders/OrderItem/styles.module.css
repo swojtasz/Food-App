@@ -1,0 +1,31 @@
+.orderItem {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.orderItem .headers {
+    display: flex;
+}
+
+.orderItem .headers h1 {
+    margin: 0;
+    font-size: x-large;
+}
+
+.orderItem .headers button {
+    font: inherit;
+    background-color: #05386b;
+    border: none;
+    color: white;
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: small;
+}
+
+.orderItem .headers .container {
+    width: 33.333%;
+}
