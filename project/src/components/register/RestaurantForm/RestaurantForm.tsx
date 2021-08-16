@@ -6,19 +6,23 @@ import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { auth, db } from "../../../config/firebase";
 import { authActions } from "../../../store/auth-slice";
+import PlacesAutocompleteComponent from "../../GoogleMap/PlacesAutocomplete";
 
 const RestaurantForm: React.FC = () => {
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const phoneNumberRef = useRef<HTMLInputElement>(null);
-    const cityRef = useRef<HTMLInputElement>(null);
-    const addressRef = useRef<HTMLInputElement>(null);
+    const [address, setAddress] = useState<string>();
 
     const [error, setError] = useState<null | string>(null);
 
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const onSetAddress = (address: string) => {
+        setAddress(address);
+    };
 
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
@@ -29,8 +33,7 @@ const RestaurantForm: React.FC = () => {
             name: nameRef.current!.value,
             email: emailRef.current!.value,
             phoneNumber: phoneNumberRef.current!.value,
-            city: cityRef.current!.value,
-            address: addressRef.current!.value,
+            address: address,
             userType: "restaurant",
         };
 
@@ -45,8 +48,7 @@ const RestaurantForm: React.FC = () => {
                     });
                 db.ref(`menu/${result.user!.uid}/info`)
                     .set({
-                        restaurantAddress: registrationProps.address,
-                        restaurantCity: registrationProps.city,
+                        restaurantAddress: address,
                         restaurantPhone: registrationProps.phoneNumber,
                         restaurantName: registrationProps.name,
                     })
@@ -81,12 +83,8 @@ const RestaurantForm: React.FC = () => {
                 <input type="text" id="phone" ref={phoneNumberRef} />
             </div>
             <div className={classes.control}>
-                <label htmlFor="city">Miasto</label>
-                <input type="text" id="city" ref={cityRef} />
-            </div>
-            <div className={classes.control}>
                 <label htmlFor="address">Adres</label>
-                <input type="text" id="address" ref={addressRef} />
+                <PlacesAutocompleteComponent onSetAddress={onSetAddress} />
             </div>
             <button type="submit">Zarejestruj</button>
             {error && <p className={classes.error}>{error}</p>}

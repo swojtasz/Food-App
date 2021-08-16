@@ -5,7 +5,7 @@ import RestaurantForm from "../../../components/register/RestaurantForm/Restaura
 
 const RegisterRestaurant: React.FC = (props) => {
     return (
-        <div className={classes.login}>
+        <div className={classes.register}>
             <h1>Rejestracja</h1>
             <RestaurantForm />
             <h3>Jesteś już zarejestrowany?</h3>

@@ -24,14 +24,10 @@ const OrderItem: React.FC<{ order: OrderInfo }> = (props) => {
                 <div className={classes.container}>
                     <h1>Miejsce odbioru</h1>
                     <p>
-                        {props.order.orderInfo.restaurantInfo.restaurantCity}{" "}
                         {props.order.orderInfo.restaurantInfo.restaurantAddress}
                     </p>
                     <h1>Miejsce docelowe</h1>
-                    <p>
-                        {props.order.clientInfo.city}{" "}
-                        {props.order.clientInfo.address}
-                    </p>
+                    <p>{props.order.clientInfo.address}</p>
                 </div>
                 <div className={classes.container}>
                     <h1>Czas odbioru</h1>

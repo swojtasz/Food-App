@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { db } from "../../../config/firebase";
 import { Order } from "../../../types/Order";
 import { RestaurantInfo } from "../../../types/RestaurantInfo";
+import PlacesAutocompleteComponent from "../../GoogleMap/PlacesAutocomplete";
 import classes from "./styles.module.css";
 
 const CheckoutForm: React.FC<{
@@ -11,19 +12,14 @@ const CheckoutForm: React.FC<{
     restaurantInfo: RestaurantInfo;
 }> = (props) => {
     const [isError, setIsError] = useState<string | null>(null);
-    const [city, setCity] = useState<string>("");
-    const [address, setAddress] = useState<string>("");
-    const [phoneNumber, setPhoneNumber] = useState<string>("");
+    const [address, setAddress] = useState<string>();
+    const [phoneNumber, setPhoneNumber] = useState<string>();
     const [isLoading, setIsLoading] = useState(false);
 
     const history = useHistory();
 
-    const onSetCity = (city: React.ChangeEvent<HTMLInputElement>) => {
-        setCity(city.target.value);
-    };
-
-    const onSetAddress = (address: React.ChangeEvent<HTMLInputElement>) => {
-        setAddress(address.target.value);
+    const onSetAddress = (address: string) => {
+        setAddress(address);
     };
 
     const onSetNumber = (phoneNumber: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,15 +29,11 @@ const CheckoutForm: React.FC<{
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
 
-        if (city.trim().length === 0) {
-            setIsError("Błąd! Podaj miasto dostawy"!);
-            return;
-        }
-        if (address.trim().length === 0) {
+        if (address && address.trim().length === 0) {
             setIsError("Błąd! Podaj adres dostawy"!);
             return;
         }
-        if (phoneNumber.trim().length === 0) {
+        if (phoneNumber && phoneNumber.trim().length === 0) {
             setIsError("Błąd! Podaj numer telefonu!");
             return;
         }
@@ -54,7 +46,6 @@ const CheckoutForm: React.FC<{
                     restaurantInfo: props.restaurantInfo,
                 },
                 clientInfo: {
-                    city: city,
                     address: address,
                     phoneNumber: phoneNumber,
                 },
@@ -79,22 +70,8 @@ const CheckoutForm: React.FC<{
     return (
         <form className={classes.form} onSubmit={formSubmitHandler}>
             <div>
-                <label htmlFor="city">Miasto dostawy:</label>
-                <input
-                    type="text"
-                    id="city"
-                    onChange={onSetCity}
-                    value={city}
-                />
-            </div>
-            <div>
                 <label htmlFor="address">Adres dostawy:</label>
-                <input
-                    type="text"
-                    id="address"
-                    onChange={onSetAddress}
-                    value={address}
-                />
+                <PlacesAutocompleteComponent onSetAddress={onSetAddress} />
             </div>
             <div>
                 <label htmlFor="number">Numer telefonu:</label>
