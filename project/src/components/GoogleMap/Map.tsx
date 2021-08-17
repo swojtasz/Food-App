@@ -1,21 +1,23 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
 
-const Map: React.FC<{ coordinates: google.maps.LatLngLiteral }> = (props) => {
+const Map: React.FC<{
+    restaurantMarker: google.maps.LatLngLiteral;
+    clientMarker: google.maps.LatLngLiteral;
+}> = (props) => {
     const mapContainerStyle = {
-        width: "100%",
-        height: "70vh",
+        width: "60rem",
+        height: "30rem",
     };
 
     return (
-        <div>
-            <GoogleMap
-                mapContainerStyle={mapContainerStyle}
-                zoom={12}
-                center={props.coordinates}
-            >
-                <Marker position={props.coordinates}></Marker>
-            </GoogleMap>
-        </div>
+        <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            zoom={13}
+            center={props.restaurantMarker}
+        >
+            <Marker position={props.restaurantMarker}></Marker>
+            <Marker position={props.clientMarker}></Marker>
+        </GoogleMap>
     );
 };
 

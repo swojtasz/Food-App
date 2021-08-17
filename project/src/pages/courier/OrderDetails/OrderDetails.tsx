@@ -8,6 +8,7 @@ import { OrderInfo } from "../../../types/OrderInfo";
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
 import Map from "../../../components/GoogleMap/Map";
 import classes from "./styles.module.css";
+import AddressToCoordinates from "../../../components/GoogleMap/AddressToCoordinates";
 
 const OrderDetails: React.FC = () => {
     const params = useParams<{ id?: string }>();
@@ -17,8 +18,20 @@ const OrderDetails: React.FC = () => {
 
     const [order, setOrder] = useState<OrderInfo>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [restaurantLatLng, setRestaurantLatLng] =
+        useState<google.maps.LatLngLiteral>();
+    const [clientLatLng, setClientLatLng] =
+        useState<google.maps.LatLngLiteral>();
 
     useEffect(() => {
+        const setCoordinates = async (
+            restaurantAddress: string,
+            clientAddress: string
+        ) => {
+            setRestaurantLatLng(await AddressToCoordinates(restaurantAddress));
+            setClientLatLng(await AddressToCoordinates(clientAddress));
+        };
+
         db.ref(`orders/${id}`)
             .get()
             .then((snapshot) => {
@@ -29,6 +42,11 @@ const OrderDetails: React.FC = () => {
                         status: snapshot.val().status,
                         id: snapshot.val().id,
                     });
+                    setCoordinates(
+                        snapshot.val().orderInfo.restaurantInfo
+                            .restaurantAddress,
+                        snapshot.val().clientInfo.address
+                    );
                 }
             })
             .catch((error) => {
@@ -50,11 +68,9 @@ const OrderDetails: React.FC = () => {
         dispatch(orderActions.setRefetchList(true));
     };
 
-    console.log(order);
-
     if (isLoading && !order) {
         return <LoadingSpinner />;
-    } else if (!!order) {
+    } else if (!!order && !!restaurantLatLng && !!clientLatLng) {
         return (
             <div className={classes.orderItem}>
                 <div className={classes.headers}>
@@ -80,6 +96,10 @@ const OrderDetails: React.FC = () => {
                         </button>
                     </div>
                 </div>
+                <Map
+                    restaurantMarker={restaurantLatLng}
+                    clientMarker={clientLatLng}
+                />
             </div>
         );
     } else {
