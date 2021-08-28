@@ -69,7 +69,7 @@ const CheckoutForm: React.FC<{
 
     return (
         <form className={classes.form} onSubmit={formSubmitHandler}>
-            <div>
+            <div className={classes.placesAutocomplete}>
                 <label htmlFor="address">Adres dostawy:</label>
                 <PlacesAutocompleteComponent onSetAddress={onSetAddress} />
             </div>

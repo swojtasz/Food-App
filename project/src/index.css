@@ -8,8 +8,8 @@
 
 html,
 body {
-    height: 100%;
-    width: 100%;
+    min-height: 100%;
+    min-width: 100%;
 }
 
 body {
@@ -17,8 +17,12 @@ body {
     margin: 0;
     font-family: Poppins, sans-serif;
     overflow: hiddden;
-    background: url("background_blue.jpg") bottom no-repeat;
-    background-size: cover;
+    background: linear-gradient(
+        177deg,
+        rgb(15, 75, 165) 0%,
+        rgba(18, 124, 175, 1) 65%,
+        rgba(32, 205, 250, 1) 100%
+    );
 }
 
 code {

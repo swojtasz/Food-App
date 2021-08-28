@@ -34,15 +34,13 @@ const ShowMenuItem: React.FC<{ item: Menu[]; restaurantInfo: RestaurantInfo }> =
             dispatch(orderActions.removeItem(itemToRemove));
         };
 
-        let itemNumber = 0;
-
-        const menu = props.item.map((item) => {
-            itemNumber++;
+        const menu = props.item.map((item, itemIdx) => {
+            itemIdx++;
             return (
-                <li key={item.name}>
+                <li key={itemIdx}>
                     <div className={classes.row}>
                         <h1>
-                            {itemNumber}.{item.name}
+                            {itemIdx}. {item.name}
                         </h1>
                         <p>{item.price}zł</p>
                     </div>

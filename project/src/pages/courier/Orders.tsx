@@ -32,13 +32,14 @@ const Orders: React.FC = () => {
                         });
                     }
                     setOrders(ordersArray);
+                    setIsLoading(false);
                 }
             })
             .catch((error) => {
+                setIsLoading(false);
                 console.log(error);
             });
 
-        setIsLoading(false);
         dispatch(orderActions.setRefetchList(false));
     }, [refetch, dispatch]);
 
@@ -47,12 +48,18 @@ const Orders: React.FC = () => {
     } else if (orders.length !== 0) {
         return (
             <div className={classes.orders}>
-                <h1>Zlecenia możliwe do przyjęcia</h1>
+                <h1 className={classes.header}>
+                    Zlecenia możliwe do przyjęcia
+                </h1>
                 <OrderList orderList={orders} />
             </div>
         );
     } else {
-        return <h1>Brak możliwych zleceń do przyjęcia</h1>;
+        return (
+            <h1 style={{ color: "white" }}>
+                Brak możliwych zleceń do przyjęcia
+            </h1>
+        );
     }
 };
 

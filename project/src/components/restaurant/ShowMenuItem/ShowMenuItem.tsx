@@ -14,7 +14,9 @@ const ShowMenuItem: React.FC<{
         <div className={classes.menu}>
             <li key={props.item.name}>
                 <div className={classes.row}>
-                    <h1>{props.item.name}</h1>
+                    <h1>
+                        {props.index}. {props.item.name}
+                    </h1>
                     <p>{props.item.price}zł</p>
                 </div>
                 <div className={classes.row}>

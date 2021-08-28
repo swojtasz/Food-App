@@ -14,7 +14,7 @@ const CourierRoute: React.FC = (props) => {
             <Route path="/myOrders" exact>
                 <MyOrders />
             </Route>
-            <Route path="/myOrders/:id" exact>
+            <Route path="/orders/:id" exact>
                 <OrderDetails />
             </Route>
             <Route path="/orders">

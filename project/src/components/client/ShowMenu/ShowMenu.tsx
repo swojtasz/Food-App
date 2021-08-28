@@ -7,9 +7,9 @@ import { Restaurant } from "../../../types/Restaurant";
 const ShowMenu: React.FC<{ restaurants: Restaurant[] }> = (props) => {
     let restaurantNames;
 
-    restaurantNames = props.restaurants.map((item) => {
+    restaurantNames = props.restaurants.map((item, itemIdx) => {
         return (
-            <li key={item.name}>
+            <li key={itemIdx}>
                 <Link to={`/showMenuItem/${item.id}`}>{item.name}</Link>
             </li>
         );

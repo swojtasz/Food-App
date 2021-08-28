@@ -1,11 +1,8 @@
 .form {
     margin: auto;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 1);
     width: 25rem;
-    border-radius: 8px;
     padding: 1rem;
     text-align: center;
-    background-color: white;
     font-size: 1.2rem;
 }
 
@@ -13,40 +10,42 @@
     margin-bottom: 0.5rem;
 }
 
-.control label {
+.form label {
     display: block;
-    color: black;
     margin-bottom: 0.5rem;
+    font-weight: normal;
 }
 
-.control input {
+.form input {
     display: block;
-    width: 20rem;
-    margin: auto;
+    width: 100%;
+    font: inherit;
+    font-size: 1rem;
+    padding: 0.5rem;
     border-radius: 4px;
-    padding: 0.25rem;
-    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+    border-color: white;
 }
 
 .form button {
     position: relative;
     display: inline-block;
     font-weight: bold;
-    width: 7rem;
-    height: 2.5rem;
+    font-size: medium;
+    width: 9rem;
+    height: 3rem;
     margin-top: 0.5rem;
     text-decoration: none;
-    color: white;
-    background: #0a7b79;
+    color: rgb(21, 150, 209);
+    background: white;
     transition: 0.4s;
     border: none;
-    font-size: small;
     text-align: center;
     border-radius: 5px;
 }
 
 .form button:hover {
-    color: black;
+    transform: scale(1.1);
 }
 
 .form .error {

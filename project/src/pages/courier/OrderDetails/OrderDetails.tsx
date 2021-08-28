@@ -28,6 +28,7 @@ const OrderDetails: React.FC = () => {
             restaurantAddress: string,
             clientAddress: string
         ) => {
+            setIsLoading(false);
             setRestaurantLatLng(await AddressToCoordinates(restaurantAddress));
             setClientLatLng(await AddressToCoordinates(clientAddress));
         };
@@ -47,13 +48,13 @@ const OrderDetails: React.FC = () => {
                             .restaurantAddress,
                         snapshot.val().clientInfo.address
                     );
+                    setIsLoading(false);
                 }
             })
             .catch((error) => {
+                setIsLoading(false);
                 console.log("Failed to push user to Database!");
             });
-
-        setIsLoading(false);
     }, [id]);
 
     const acceptOrderHandler = () => {
@@ -68,7 +69,7 @@ const OrderDetails: React.FC = () => {
         dispatch(orderActions.setRefetchList(true));
     };
 
-    if (isLoading && !order) {
+    if (isLoading) {
         return <LoadingSpinner />;
     } else if (!!order && !!restaurantLatLng && !!clientLatLng) {
         return (
@@ -103,7 +104,7 @@ const OrderDetails: React.FC = () => {
             </div>
         );
     } else {
-        return <h1>No details</h1>;
+        return <h1 style={{ color: "white" }}>No details</h1>;
     }
 };
 

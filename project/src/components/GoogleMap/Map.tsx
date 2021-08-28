@@ -1,4 +1,6 @@
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { DirectionsRenderer, GoogleMap, Marker } from "@react-google-maps/api";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Map: React.FC<{
     restaurantMarker: google.maps.LatLngLiteral;
@@ -9,15 +11,88 @@ const Map: React.FC<{
         height: "30rem",
     };
 
+    const [currentLocation, setCurrentLocation] =
+        useState<google.maps.LatLngLiteral>();
+    const [directions, setDirections] =
+        useState<google.maps.DirectionsResult>();
+    const [duration, setDuration] = useState<string[]>([]);
+
+    useEffect(() => {
+        if (!currentLocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                setCurrentLocation({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                });
+            });
+        }
+
+        if (!!currentLocation) {
+            const DirectionsService = new google.maps.DirectionsService();
+            const DistanceService = new google.maps.DistanceMatrixService();
+
+            DirectionsService.route(
+                {
+                    origin: currentLocation,
+                    destination: props.clientMarker,
+                    waypoints: [
+                        {
+                            location: new google.maps.LatLng(
+                                props.restaurantMarker.lat,
+                                props.restaurantMarker.lng
+                            ),
+                        },
+                    ],
+
+                    travelMode: google.maps.TravelMode.BICYCLING,
+                },
+                (result, status) => {
+                    if (status === google.maps.DirectionsStatus.OK) {
+                        setDirections(result!);
+                    } else {
+                        console.error(`error fetching directions ${result}`);
+                    }
+                }
+            );
+
+            const origins = [currentLocation, props.restaurantMarker];
+            const destinations = [props.restaurantMarker, props.clientMarker];
+
+            DistanceService.getDistanceMatrix({
+                origins: origins,
+                destinations: destinations,
+                travelMode: google.maps.TravelMode.BICYCLING,
+            }).then((response) => {
+                const durations: string[] = [];
+                response.rows.forEach((row) => {
+                    row.elements.forEach((element) => {
+                        durations.push(element.duration.text);
+                        console.log(element.duration.text);
+                    });
+                });
+                setDuration(durations);
+            });
+        }
+    }, [currentLocation, props.clientMarker, props.restaurantMarker]);
+
     return (
-        <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            zoom={13}
-            center={props.restaurantMarker}
-        >
-            <Marker position={props.restaurantMarker}></Marker>
-            <Marker position={props.clientMarker}></Marker>
-        </GoogleMap>
+        <>
+            <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                zoom={17}
+                center={currentLocation}
+            >
+                {/* <Marker position={props.restaurantMarker}></Marker>
+            <Marker position={props.clientMarker}></Marker> */}
+                {directions && <DirectionsRenderer directions={directions} />}
+            </GoogleMap>
+            {duration && (
+                <>
+                    <p>Punkt A-B: {duration[0]}</p>
+                    <p>Punkt B-C: {duration[3]}</p>
+                </>
+            )}
+        </>
     );
 };
 

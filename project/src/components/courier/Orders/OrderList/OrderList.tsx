@@ -8,9 +8,9 @@ const OrderList: React.FC<{ orderList: OrderInfo[] }> = (props) => {
         .filter((item) => {
             return item.status === "active";
         })
-        .map((item) => {
+        .map((item, itemIdx) => {
             return (
-                <li key={item.id}>
+                <li key={itemIdx}>
                     <OrderItem order={item} />
                 </li>
             );
@@ -23,6 +23,18 @@ const OrderList: React.FC<{ orderList: OrderInfo[] }> = (props) => {
     } else {
         return (
             <div className={classes.orderList}>
+                <div className={classes.container}>
+                    <div className={classes.header}>
+                        <h1>Miejsce odbioru</h1>
+                    </div>
+                    <div className={classes.header}>
+                        <h1>Miejsce docelowe</h1>
+                    </div>
+                    <div className={classes.header}>
+                        <h1>Średni czas przejazdu</h1>
+                    </div>
+                </div>
+
                 <ul>{orders}</ul>
             </div>
         );

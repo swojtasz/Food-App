@@ -38,14 +38,12 @@ const ShowMenu: React.FC = () => {
 
     let menuList: JSX.Element | JSX.Element[] = <LoadingSpinner />;
 
-    let index = 0;
-
     if (isLoading) {
         return <LoadingSpinner />;
     } else if (menu.length !== 0) {
-        menuList = menu.map((item) => {
-            index++;
-            return <ShowMenuItem key={item.name} item={item} index={index} />;
+        menuList = menu.map((item, itemIdx) => {
+            itemIdx++;
+            return <ShowMenuItem key={itemIdx} item={item} index={itemIdx} />;
         });
         return (
             <div className={classes.meals}>

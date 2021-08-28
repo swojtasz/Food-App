@@ -4,9 +4,9 @@ import OrderItem from "../OrderItem/OrderItem";
 import classes from "./styles.module.css";
 
 const OrderList: React.FC<{ orderList: OrderInfo[] }> = (props) => {
-    const orders = props.orderList.map((item) => {
+    const orders = props.orderList.map((item, itemIdx) => {
         return (
-            <li key={item.id}>
+            <li key={itemIdx}>
                 <OrderItem order={item} />
             </li>
         );

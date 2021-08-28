@@ -27,14 +27,10 @@ const PlacesAutocompleteComponent: React.FC<{
                 loading,
             }) => (
                 <div style={{ maxHeight: "7rem", overflow: "auto" }}>
-                    <input
-                        {...getInputProps({
-                            placeholder: "Type address...",
-                        })}
-                    />
+                    <input {...getInputProps({})} />
                     <div>
                         {loading && <p>Loading...</p>}
-                        {suggestions.map((suggestion) => {
+                        {suggestions.map((suggestion, suggestionId) => {
                             const style = {
                                 backgroundColor: suggestion.active
                                     ? "#41b6e6 "
@@ -49,6 +45,7 @@ const PlacesAutocompleteComponent: React.FC<{
                                     {...getSuggestionItemProps(suggestion, {
                                         style,
                                     })}
+                                    key={suggestionId}
                                 >
                                     <span>{suggestion.description}</span>
                                 </div>

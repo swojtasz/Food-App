@@ -15,9 +15,9 @@ const Order: React.FC<{ restaurantInfo: RestaurantInfo }> = (props) => {
     const totalCost = useSelector((state: RootState) => state.order.totalPrice);
     const ordersArray = useSelector((state: RootState) => state.order.order);
 
-    const orders = ordersArray.map((item) => {
+    const orders = ordersArray.map((item, itemIdx) => {
         return (
-            <li key={item.name}>
+            <li key={itemIdx}>
                 <p>{item.name}</p>
                 <p>{item.quantity}</p>
             </li>

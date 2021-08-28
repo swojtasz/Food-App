@@ -1,8 +1,12 @@
 .orderItem {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 1rem;
+    background-color: rgb(21, 150, 209);
+    padding: 1.5rem;
     width: 100%;
+    margin: 0;
     border-radius: 10px;
+    color: white;
+    box-shadow: 0 1px 150px rgba(255, 255, 255, 1);
+    border-radius: 25px;
 }
 
 .orderItem .headers {
@@ -15,15 +19,25 @@
 }
 
 .orderItem .headers button {
-    font: inherit;
-    background-color: #05386b;
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    font-size: medium;
+    width: 12rem;
+    height: 4rem;
+    margin-top: 0.5rem;
+    text-decoration: none;
+    color: rgb(21, 150, 209);
+    background: white;
+    transition: 0.4s;
     border: none;
-    color: white;
-    margin-top: 1.5rem;
-    padding: 1rem 1.5rem;
-    border-radius: 4px;
+    text-align: center;
     cursor: pointer;
-    font-size: small;
+    border-radius: 5px;
+}
+
+.orderItem .headers button:hover {
+    transform: scale(1.1);
 }
 
 .orderItem .headers .container {

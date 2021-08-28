@@ -1,5 +1,21 @@
 .orderList {
     width: 100%;
+    color: white;
+}
+
+.orderList .container {
+    display: flex;
+    background-color: rgb(21, 150, 209);
+    padding: 1rem;
+}
+
+.orderList .container .header {
+    width: 30%;
+}
+
+.orderList .container h1 {
+    margin: 0;
+    font-size: 1.4rem;
 }
 
 .orderList ul {

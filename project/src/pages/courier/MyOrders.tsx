@@ -53,12 +53,16 @@ const MyOrders: React.FC = () => {
     } else if (filteredOrders.length !== 0) {
         return (
             <div className={classes.orders}>
-                <h1>Aktualne zlecenia:</h1>
+                <h1 className={classes.header}>Aktualne zlecenia:</h1>
                 <OrderList orderList={filteredOrders} />
             </div>
         );
     } else {
-        return <h1>Brak możliwych zleceń do przyjęcia</h1>;
+        return (
+            <h1 style={{ color: "white" }}>
+                Brak możliwych zleceń do przyjęcia
+            </h1>
+        );
     }
 };
 
