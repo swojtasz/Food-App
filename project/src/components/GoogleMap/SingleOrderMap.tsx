@@ -1,6 +1,7 @@
 import { DirectionsRenderer, GoogleMap, Marker } from "@react-google-maps/api";
 import { useEffect } from "react";
 import { useState } from "react";
+import GetDurations from "./GetDurations";
 
 const Map: React.FC<{
     restaurantMarker: google.maps.LatLngLiteral;
@@ -18,6 +19,7 @@ const Map: React.FC<{
     const [duration, setDuration] = useState<string[]>([]);
 
     useEffect(() => {
+        // set current position
         if (!currentLocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 setCurrentLocation({
@@ -29,8 +31,8 @@ const Map: React.FC<{
 
         if (!!currentLocation) {
             const DirectionsService = new google.maps.DirectionsService();
-            const DistanceService = new google.maps.DistanceMatrixService();
 
+            // set route
             DirectionsService.route(
                 {
                     origin: currentLocation,
@@ -58,20 +60,7 @@ const Map: React.FC<{
             const origins = [currentLocation, props.restaurantMarker];
             const destinations = [props.restaurantMarker, props.clientMarker];
 
-            DistanceService.getDistanceMatrix({
-                origins: origins,
-                destinations: destinations,
-                travelMode: google.maps.TravelMode.BICYCLING,
-            }).then((response) => {
-                const durations: string[] = [];
-                response.rows.forEach((row) => {
-                    row.elements.forEach((element) => {
-                        durations.push(element.duration.text);
-                        console.log(element.duration.text);
-                    });
-                });
-                setDuration(durations);
-            });
+            setDuration(GetDurations(origins, destinations));
         }
     }, [currentLocation, props.clientMarker, props.restaurantMarker]);
 

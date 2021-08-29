@@ -1,31 +1,48 @@
-.orderItem {
-    background-color: rgb(21, 150, 209);
-    padding: 1rem;
-    width: 100%;
-    border-radius: 10px;
-}
-
 .orderItem .headers {
     display: flex;
+    padding: 0.7rem 1rem;
+    background-color: rgb(21, 150, 209);
+    border-top: 2px;
 }
 
 .orderItem .headers h1 {
     margin: 0;
-    font-size: x-large;
+    font-size: 1.2rem;
+    color: white;
 }
 
-.orderItem .headers button {
-    font: inherit;
-    background-color: #05386b;
-    border: none;
+.orderItem .headers a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
     color: white;
-    margin-top: 1.5rem;
-    padding: 1rem 1.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: small;
+    transition: 0.1s;
+    font-size: 1.5rem;
+}
+
+.orderItem .headers p {
+    padding: 0;
+    margin: 0;
 }
 
 .orderItem .headers .container {
-    width: 33.333%;
+    width: 30%;
+}
+
+.orderItem .headers button {
+    margin: 0;
+    margin-bottom: 2rem;
+    font: inherit;
+    background-color: white;
+    border: none;
+    color: rgb(21, 150, 209);
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: small;
+    transition: 0.3s;
+}
+
+.orderItem .headers button:hover {
+    transform: scale(1.1);
 }

@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { auth, db } from "../../../config/firebase";
 import { orderActions } from "../../../store/order-slice";
 import { OrderInfo } from "../../../types/OrderInfo";
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
-import Map from "../../../components/GoogleMap/Map";
+import Map from "../../../components/GoogleMap/SingleOrderMap";
 import classes from "./styles.module.css";
 import AddressToCoordinates from "../../../components/GoogleMap/AddressToCoordinates";
 
 const OrderDetails: React.FC = () => {
     const params = useParams<{ id?: string }>();
     const { id } = params;
+    const history = useHistory();
 
     const dispatch = useDispatch();
 
@@ -67,6 +68,7 @@ const OrderDetails: React.FC = () => {
                 console.log("Failed to push user to Database!");
             });
         dispatch(orderActions.setRefetchList(true));
+        history.push("/orders");
     };
 
     if (isLoading) {

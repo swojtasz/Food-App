@@ -14,7 +14,6 @@ const OrderItem: React.FC<{ order: OrderInfo }> = (props) => {
                 <div className={classes.container}>
                     <p>{props.order.clientInfo.address}</p>
                 </div>
-
                 <div className={classes.container}>
                     <p> 10 minut</p>
                 </div>
