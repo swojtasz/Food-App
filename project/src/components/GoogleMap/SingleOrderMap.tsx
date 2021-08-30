@@ -1,6 +1,9 @@
 import { DirectionsRenderer, GoogleMap, Marker } from "@react-google-maps/api";
 import { useEffect } from "react";
 import { useState } from "react";
+import { LocalizationUsage } from "../../types/LocalizationUsage";
+import { MapPoint } from "../../types/MapPoint";
+import CreateChildren from "./CreateChildren";
 import GetDurations from "./GetDurations";
 
 const Map: React.FC<{
@@ -16,7 +19,7 @@ const Map: React.FC<{
         useState<google.maps.LatLngLiteral>();
     const [directions, setDirections] =
         useState<google.maps.DirectionsResult>();
-    const [duration, setDuration] = useState<string[]>([]);
+    const [duration, setDuration] = useState<number[]>([]);
 
     useEffect(() => {
         // set current position
@@ -60,7 +63,28 @@ const Map: React.FC<{
             const origins = [currentLocation, props.restaurantMarker];
             const destinations = [props.restaurantMarker, props.clientMarker];
 
-            setDuration(GetDurations(origins, destinations));
+            GetDurations(origins, destinations).then((value) => {
+                setDuration(value);
+            });
+
+            const origin: MapPoint = {
+                cost: 0,
+                localization: currentLocation,
+                children: [],
+            };
+
+            const restaurants: LocalizationUsage[] = [
+                { localization: props.restaurantMarker, isUsed: false },
+                { localization: props.clientMarker, isUsed: false },
+            ]; //temporary
+            const clients: LocalizationUsage[] = [
+                { localization: props.clientMarker, isUsed: false },
+                { localization: props.restaurantMarker, isUsed: false },
+            ];
+
+            CreateChildren(origin, restaurants, clients);
+
+            console.log(origin);
         }
     }, [currentLocation, props.clientMarker, props.restaurantMarker]);
 

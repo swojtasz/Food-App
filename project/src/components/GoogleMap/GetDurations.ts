@@ -1,24 +1,22 @@
-const GetDurations = (
+const GetDurations = async (
     origins: google.maps.LatLngLiteral[],
     destinations: google.maps.LatLngLiteral[]
 ) => {
     const DistanceService = new google.maps.DistanceMatrixService();
 
-    const durations: string[] = [];
-
-    DistanceService.getDistanceMatrix({
+    return DistanceService.getDistanceMatrix({
         origins: origins,
         destinations: destinations,
         travelMode: google.maps.TravelMode.BICYCLING,
     }).then((response) => {
+        const durations: number[] = [];
         response.rows.forEach((row) => {
             row.elements.forEach((element) => {
-                durations.push(element.duration.text);
-                console.log(element.duration.text);
+                durations.push(element.duration.value);
             });
         });
+        return durations;
     });
-    return durations;
 };
 
 export default GetDurations;
