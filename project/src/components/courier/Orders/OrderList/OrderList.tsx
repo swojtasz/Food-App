@@ -16,8 +16,6 @@ const OrderList: React.FC<{ orderList: OrderInfo[] }> = (props) => {
             );
         });
 
-    console.log(props.orderList);
-
     if (!orders) {
         return <LoadingSpinner />;
     } else {

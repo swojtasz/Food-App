@@ -3,8 +3,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { LocalizationUsage } from "../../types/LocalizationUsage";
 import { MapPoint } from "../../types/MapPoint";
+import { OptimalCostAndRoute } from "../../types/OptimalCostAndRoute";
 import CreateChildren from "./CreateChildren";
 import GetDurations from "./GetDurations";
+import Traverse from "./Traverse";
 
 const Map: React.FC<{
     restaurantMarker: google.maps.LatLngLiteral;
@@ -82,9 +84,23 @@ const Map: React.FC<{
                 { localization: props.restaurantMarker, isUsed: false },
             ];
 
-            CreateChildren(origin, restaurants, clients);
+            const optimalCostAndRoute: OptimalCostAndRoute = {
+                cost: Number.MAX_VALUE,
+                route: [],
+            };
 
-            console.log(origin);
+            const countOptimals = async () => {
+                await CreateChildren(origin, restaurants, clients);
+                await Traverse(
+                    origin,
+                    optimalCostAndRoute,
+                    [currentLocation],
+                    0
+                );
+                console.log(optimalCostAndRoute);
+            };
+
+            countOptimals();
         }
     }, [currentLocation, props.clientMarker, props.restaurantMarker]);
 

@@ -3,7 +3,7 @@ import { MapPoint } from "../../types/MapPoint";
 import GetDurations from "./GetDurations";
 import { cloneDeep } from "lodash";
 
-const CreateChildren = (
+const CreateChildren = async (
     node: MapPoint,
     restaurants: LocalizationUsage[],
     clients: LocalizationUsage[]
@@ -12,43 +12,44 @@ const CreateChildren = (
         console.log("ERROR CreateChildren");
         return;
     }
+    const restaurantDurationsPromises = restaurants.map((restaurant) =>
+        GetDurations([node.localization], [restaurant.localization])
+    );
+    const restaurantDurationsList = await Promise.all(
+        restaurantDurationsPromises
+    );
+    const clientDurationsPromises = clients.map((client) =>
+        GetDurations([node.localization], [client.localization])
+    );
+    const clientDurationsList = await Promise.all(clientDurationsPromises);
+
     for (const idx in restaurants) {
         if (restaurants[idx].isUsed) {
             if (!clients[idx].isUsed) {
-                GetDurations(
-                    [node.localization],
-                    [clients[idx].localization]
-                ).then((duration) => {
-                    const newNode: MapPoint = {
-                        cost: duration[0],
-                        localization: clients[idx].localization,
-                        children: [],
-                    };
-                    node.children.push(newNode);
-
-                    const clientsCopy = cloneDeep(clients);
-
-                    clientsCopy[idx].isUsed = true;
-                    CreateChildren(newNode, restaurants, clientsCopy);
-                });
-            }
-        } else {
-            GetDurations(
-                [node.localization],
-                [restaurants[idx].localization]
-            ).then((duration) => {
                 const newNode: MapPoint = {
-                    cost: duration[0],
-                    localization: restaurants[idx].localization,
+                    cost: clientDurationsList[idx][0],
+                    localization: clients[idx].localization,
                     children: [],
                 };
                 node.children.push(newNode);
 
-                const restaurantsCopy = cloneDeep(restaurants);
+                const clientsCopy = cloneDeep(clients);
 
-                restaurantsCopy[idx].isUsed = true;
-                CreateChildren(newNode, restaurantsCopy, clients);
-            });
+                clientsCopy[idx].isUsed = true;
+                await CreateChildren(newNode, restaurants, clientsCopy);
+            }
+        } else {
+            const newNode: MapPoint = {
+                cost: restaurantDurationsList[idx][0],
+                localization: restaurants[idx].localization,
+                children: [],
+            };
+            node.children.push(newNode);
+
+            const restaurantsCopy = cloneDeep(restaurants);
+
+            restaurantsCopy[idx].isUsed = true;
+            await CreateChildren(newNode, restaurantsCopy, clients);
         }
     }
 };
