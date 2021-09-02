@@ -1,14 +1,9 @@
-import { DirectionsRenderer, GoogleMap, Marker } from "@react-google-maps/api";
+import { DirectionsRenderer, GoogleMap } from "@react-google-maps/api";
 import { useEffect } from "react";
 import { useState } from "react";
-import { LocalizationUsage } from "../../types/LocalizationUsage";
-import { MapPoint } from "../../types/MapPoint";
-import { OptimalCostAndRoute } from "../../types/OptimalCostAndRoute";
-import CreateChildren from "./CreateChildren";
 import GetDurations from "./GetDurations";
-import Traverse from "./Traverse";
 
-const Map: React.FC<{
+const SingleOrderMap: React.FC<{
     restaurantMarker: google.maps.LatLngLiteral;
     clientMarker: google.maps.LatLngLiteral;
 }> = (props) => {
@@ -37,7 +32,6 @@ const Map: React.FC<{
         if (!!currentLocation) {
             const DirectionsService = new google.maps.DirectionsService();
 
-            // set route
             DirectionsService.route(
                 {
                     origin: currentLocation,
@@ -45,12 +39,10 @@ const Map: React.FC<{
                     waypoints: [
                         {
                             location: new google.maps.LatLng(
-                                props.restaurantMarker.lat,
-                                props.restaurantMarker.lng
+                                props.restaurantMarker
                             ),
                         },
                     ],
-
                     travelMode: google.maps.TravelMode.BICYCLING,
                 },
                 (result, status) => {
@@ -68,39 +60,6 @@ const Map: React.FC<{
             GetDurations(origins, destinations).then((value) => {
                 setDuration(value);
             });
-
-            const origin: MapPoint = {
-                cost: 0,
-                localization: currentLocation,
-                children: [],
-            };
-
-            const restaurants: LocalizationUsage[] = [
-                { localization: props.restaurantMarker, isUsed: false },
-                { localization: props.clientMarker, isUsed: false },
-            ]; //temporary
-            const clients: LocalizationUsage[] = [
-                { localization: props.clientMarker, isUsed: false },
-                { localization: props.restaurantMarker, isUsed: false },
-            ];
-
-            const optimalCostAndRoute: OptimalCostAndRoute = {
-                cost: Number.MAX_VALUE,
-                route: [],
-            };
-
-            const countOptimals = async () => {
-                await CreateChildren(origin, restaurants, clients);
-                await Traverse(
-                    origin,
-                    optimalCostAndRoute,
-                    [currentLocation],
-                    0
-                );
-                console.log(optimalCostAndRoute);
-            };
-
-            countOptimals();
         }
     }, [currentLocation, props.clientMarker, props.restaurantMarker]);
 
@@ -125,4 +84,4 @@ const Map: React.FC<{
     );
 };
 
-export default Map;
+export default SingleOrderMap;

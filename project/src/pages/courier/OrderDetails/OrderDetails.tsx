@@ -30,8 +30,12 @@ const OrderDetails: React.FC = () => {
             clientAddress: string
         ) => {
             setIsLoading(false);
-            setRestaurantLatLng(await AddressToCoordinates(restaurantAddress));
-            setClientLatLng(await AddressToCoordinates(clientAddress));
+
+            const restaurant = await AddressToCoordinates([restaurantAddress]);
+            const client = await AddressToCoordinates([clientAddress]);
+
+            setRestaurantLatLng(restaurant[0]);
+            setClientLatLng(client[0]);
         };
 
         db.ref(`orders/${id}`)
