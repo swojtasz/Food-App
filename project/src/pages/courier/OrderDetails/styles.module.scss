@@ -1,10 +1,12 @@
+@import "/src/variables";
+
 .orderItem {
-    background-color: rgb(21, 150, 209);
+    background-color: $backgroundColor;
     padding: 1.5rem;
     width: 100%;
     margin: 0;
     border-radius: 10px;
-    color: white;
+    color: $textColor;
     box-shadow: 0 1px 150px rgba(255, 255, 255, 1);
     border-radius: 25px;
     .headers {
@@ -14,22 +16,18 @@
             font-size: x-large;
         }
         button {
-            position: relative;
-            display: inline-block;
-            font-weight: bold;
-            font-size: medium;
-            width: 12rem;
-            height: 4rem;
+            margin: 0;
+            margin-bottom: 2rem;
             margin-top: 0.5rem;
-            text-decoration: none;
-            color: rgb(21, 150, 209);
-            background: white;
-            transition: 0.4s;
+            font: inherit;
+            background-color: $textColor;
             border: none;
-            text-align: center;
+            color: $backgroundColor;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
             cursor: pointer;
-            border-radius: 5px;
-            margin-bottom: 0.5rem;
+            font-size: small;
+            transition: 0.3s;
             &:hover {
                 transform: scale(1.1);
             }

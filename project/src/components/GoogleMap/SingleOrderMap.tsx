@@ -8,7 +8,7 @@ const SingleOrderMap: React.FC<{
     clientMarker: google.maps.LatLngLiteral;
 }> = (props) => {
     const mapContainerStyle = {
-        width: "60rem",
+        width: "100%",
         height: "30rem",
     };
 

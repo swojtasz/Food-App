@@ -93,7 +93,7 @@ const CheckoutForm: React.FC<{
                 <button
                     type="submit"
                     disabled={isLoading}
-                    style={{ backgroundColor: "green" }}
+                    style={{ backgroundColor: "darkgreen" }}
                 >
                     Potwierdź zamówienie
                 </button>

@@ -1,3 +1,5 @@
+@import "/src/variables";
+
 .container {
     display: flex;
     flex-direction: column;
@@ -5,26 +7,23 @@
     margin-top: 4rem;
     padding-top: 4rem;
     padding-bottom: 6rem;
-    box-shadow: 0 1px 150px rgba(255, 255, 255, 1);
-    border-radius: 25px;
+    color: $textColor;
     h1 {
         margin: 1rem auto;
         font-size: 3rem;
-        color: white;
     }
     h3 {
-        color: white;
         margin: 1rem auto;
         font-size: 1.5rem;
     }
     a {
         margin: 0 auto;
         text-decoration: none;
-        color: white;
         font-size: 1.5rem;
         padding: 1rem 2rem;
         width: fit-content;
-        background-color: rgb(21, 150, 209);
+        background-color: $backgroundColor;
+        color: $textColor;
         border-radius: 5px;
         transition: 0.3s;
         &:hover {

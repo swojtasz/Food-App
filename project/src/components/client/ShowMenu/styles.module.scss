@@ -1,10 +1,12 @@
+@import "/src/variables";
+
 .meals {
     display: flex;
     flex-direction: column;
     width: 40%;
     margin: 2rem 0 0 3rem;
     h1 {
-        color: white;
+        color: $textColor;
         margin: 0;
         margin-bottom: 2rem;
         font-size: 2rem;
@@ -18,12 +20,12 @@
         margin-bottom: 0.6rem;
     }
     a {
-        color: white;
+        color: $textColor;
         text-decoration: none;
         font-weight: 500;
         font-size: 1.2rem;
         &:hover {
-            border-bottom: white solid 2px;
+            border-bottom: $textColor solid 2px;
         }
     }
 }

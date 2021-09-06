@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap");
+@import "./variables";
 
 *,
 *::after,
@@ -18,11 +19,13 @@ body {
     font-family: Poppins, sans-serif;
     overflow: hiddden;
     background: linear-gradient(
-        177deg,
-        rgb(15, 75, 165) 0%,
-        rgba(18, 124, 175, 1) 65%,
-        rgba(32, 205, 250, 1) 100%
+        166deg,
+        $backgroundColor 0%,
+        white 50%,
+        $backgroundColor 100%
     );
+    background: white;
+    background: radial-gradient(circle, white 0%, $backgroundColor 100%);
 }
 
 code {

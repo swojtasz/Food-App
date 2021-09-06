@@ -1,8 +1,10 @@
+@import "/src/variables";
+
 .orderItem {
     .headers {
         display: flex;
         padding: 0.7rem 1rem;
-        background-color: rgb(21, 150, 209);
+        background-color: $backgroundColor;
         border-top: 2px;
         .container {
             width: 30%;
@@ -13,13 +15,13 @@
         h1 {
             margin: 0;
             font-size: 1.2rem;
-            color: white;
+            color: $textColor;
         }
         a {
             position: relative;
             display: inline-block;
             text-decoration: none;
-            color: white;
+            color: $textColor;
             transition: 0.1s;
             font-size: 1.5rem;
         }

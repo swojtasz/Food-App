@@ -1,6 +1,8 @@
+@import "/src/variables";
+
 .orderList {
     width: 100%;
-    color: white;
+    color: $textColor;
     ul {
         list-style: none;
         margin: 0;

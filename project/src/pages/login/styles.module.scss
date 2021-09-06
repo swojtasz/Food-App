@@ -1,16 +1,18 @@
+@import "/src/variables";
+
 .login {
     margin: 5rem auto;
     width: 35rem;
     padding: 1rem;
     text-align: center;
-    color: #fff;
-    box-shadow: 0 1px 150px rgba(255, 255, 255, 1);
-    border-radius: 25px;
+    color: $textColor;
+    background: $backgroundColor;
+    border-radius: 20px;
     a {
         position: relative;
         display: inline-block;
         text-decoration: none;
-        color: white;
+        color: $textColor;
         transition: 0.1s;
         font-size: 1.5rem;
         &:hover {

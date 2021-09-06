@@ -1,14 +1,14 @@
+@import "/src/variables";
+
 .register {
     margin: 5rem auto;
-    width: 45rem;
+    width: 35rem;
     padding: 1rem;
     text-align: center;
-    color: #fff;
-    box-shadow: 0 1px 150px rgba(255, 255, 255, 1);
-    border-radius: 25px;
+    color: $textColor;
     a {
         text-decoration: none;
-        color: #fff;
+        color: $textColor;
         transition: 0.1s;
         font-size: 1.5rem;
     }
@@ -16,17 +16,17 @@
         display: flex;
         flex-direction: column;
         a {
-            background-color: rgb(21, 150, 209);
+            background-color: $backgroundColor;
             margin: 1rem auto;
             padding: 1rem 3rem;
             border-radius: 8px;
             padding: 1rem, 2rem;
-            &:hover {
-                font-weight: bolder;
-            }
         }
     }
     p {
         font-size: large;
+    }
+    a:hover {
+        font-weight: bolder;
     }
 }

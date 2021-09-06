@@ -1,3 +1,5 @@
+@import "/src/variables";
+
 .modal {
     position: fixed;
     width: 100%;
@@ -54,9 +56,9 @@
         }
         button {
             font: inherit;
-            background-color: rgb(21, 150, 209);
+            background-color: $backgroundColor;
             border: none;
-            color: white;
+            color: $textColor;
             margin-top: 1.5rem;
             padding: 1rem 1.5rem;
             border-radius: 4px;

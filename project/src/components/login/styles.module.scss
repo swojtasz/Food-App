@@ -1,3 +1,5 @@
+@import "/src/variables";
+
 .form {
     margin: auto;
     width: 25rem;
@@ -19,7 +21,7 @@
             padding: 0.5rem;
             border-radius: 4px;
             margin-bottom: 1rem;
-            border-color: white;
+            border-color: $textColor;
         }
     }
     button {
@@ -31,8 +33,8 @@
         height: 3rem;
         margin-top: 0.5rem;
         text-decoration: none;
-        color: rgb(21, 150, 209);
-        background: white;
+        color: $backgroundColor;
+        background: $textColor;
         transition: 0.4s;
         border: none;
         text-align: center;
@@ -42,7 +44,7 @@
         }
     }
     .error {
-        color: red;
+        color: darkred;
         font-size: large;
     }
 }
