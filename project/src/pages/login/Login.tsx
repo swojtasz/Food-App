@@ -1,4 +1,4 @@
-import classes from "./styles.module.css";
+import classes from "./styles.module.scss";
 
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const Login: React.FC = (props) => {
         <div className={classes.login}>
             <h1>Logowanie</h1>
             <LoginForm />
-            <h3>Nie masz konta?</h3>
+            <p>Nie masz konta?</p>
             <Link to="/register">Zarejestruj się!</Link>
         </div>
     );

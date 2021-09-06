@@ -1,4 +1,4 @@
-import classes from "./styles.module.css";
+import classes from "./styles.module.scss";
 import { useEffect, useState } from "react";
 import OrderList from "../../components/courier/Orders/OrderList/OrderList";
 import { db } from "../../config/firebase";

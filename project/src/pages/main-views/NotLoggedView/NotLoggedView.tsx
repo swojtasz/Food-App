@@ -1,5 +1,5 @@
+import classes from "./styles.module.scss";
 import { Link } from "react-router-dom";
-import classes from "./styles.module.css";
 
 const NotLoggedView: React.FC = () => {
     return (

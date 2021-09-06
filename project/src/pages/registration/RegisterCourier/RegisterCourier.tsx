@@ -1,14 +1,14 @@
-import classes from "./styles.module.css";
+import classes from "../styles.module.scss";
 
 import { Link } from "react-router-dom";
 import RegisterForm from "../../../components/register/RegisterForm/RegisterForm";
 
 const RegisterCourier: React.FC = (props) => {
     return (
-        <div className={classes.login}>
+        <div className={classes.register}>
             <h1>Rejestracja</h1>
             <RegisterForm type={"courier"} />
-            <h3>Jesteś już zarejestrowany?</h3>
+            <p>Jesteś już zarejestrowany?</p>
             <Link to="/login">Zaloguj się!</Link>
         </div>
     );

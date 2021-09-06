@@ -1,10 +1,9 @@
-import { DirectionsRenderer, GoogleMap, Marker } from "@react-google-maps/api";
+import { DirectionsRenderer, GoogleMap } from "@react-google-maps/api";
 import { useEffect } from "react";
 import { useState } from "react";
 import { LocalizationUsage } from "../../types/LocalizationUsage";
 import { MapPoint } from "../../types/MapPoint";
 import { OptimalCostAndRoute } from "../../types/OptimalCostAndRoute";
-import AddressToCoordinates from "./AddressToCoordinates";
 import CreateChildren from "./CreateChildren";
 import Traverse from "./Traverse";
 
@@ -13,7 +12,7 @@ const MyOrdersMap: React.FC<{
     clientMarkers: google.maps.LatLngLiteral[];
 }> = (props) => {
     const mapContainerStyle = {
-        width: "60rem",
+        width: "100%",
         height: "30rem",
     };
 

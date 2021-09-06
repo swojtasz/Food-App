@@ -1,0 +1,41 @@
+.orderItem {
+    background-color: rgb(21, 150, 209);
+    padding: 1.5rem;
+    width: 100%;
+    margin: 0;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 1px 150px rgba(255, 255, 255, 1);
+    border-radius: 25px;
+    .headers {
+        display: flex;
+        h1 {
+            margin: 0;
+            font-size: x-large;
+        }
+        button {
+            position: relative;
+            display: inline-block;
+            font-weight: bold;
+            font-size: medium;
+            width: 12rem;
+            height: 4rem;
+            margin-top: 0.5rem;
+            text-decoration: none;
+            color: rgb(21, 150, 209);
+            background: white;
+            transition: 0.4s;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+        .container {
+            width: 33.333%;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import classes from "./styles.module.css";
+import classes from "./styles.module.scss";
 
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

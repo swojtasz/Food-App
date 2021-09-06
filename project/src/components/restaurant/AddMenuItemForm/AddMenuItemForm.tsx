@@ -1,4 +1,4 @@
-import classes from "./styles.module.css";
+import classes from "./styles.module.scss";
 
 import { useState } from "react";
 import { auth, db } from "../../../config/firebase";

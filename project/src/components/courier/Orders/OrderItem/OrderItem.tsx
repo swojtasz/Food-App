@@ -1,6 +1,6 @@
+import classes from "./styles.module.scss";
 import { Link } from "react-router-dom";
 import { OrderInfo } from "../../../../types/OrderInfo";
-import classes from "./styles.module.css";
 
 const OrderItem: React.FC<{ order: OrderInfo }> = (props) => {
     return (

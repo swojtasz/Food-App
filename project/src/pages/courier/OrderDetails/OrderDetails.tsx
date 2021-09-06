@@ -1,3 +1,5 @@
+import classes from "./styles.module.scss";
+
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -7,7 +9,6 @@ import { orderActions } from "../../../store/order-slice";
 import { OrderInfo } from "../../../types/OrderInfo";
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
 import Map from "../../../components/GoogleMap/SingleOrderMap";
-import classes from "./styles.module.css";
 import AddressToCoordinates from "../../../components/GoogleMap/AddressToCoordinates";
 
 const OrderDetails: React.FC = () => {

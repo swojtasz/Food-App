@@ -1,4 +1,4 @@
-import classes from "./styles.module.css";
+import classes from "./styles.module.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 

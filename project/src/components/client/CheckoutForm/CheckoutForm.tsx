@@ -4,7 +4,7 @@ import { db } from "../../../config/firebase";
 import { Order } from "../../../types/Order";
 import { RestaurantInfo } from "../../../types/RestaurantInfo";
 import PlacesAutocompleteComponent from "../../GoogleMap/PlacesAutocomplete";
-import classes from "./styles.module.css";
+import classes from "./styles.module.scss";
 
 const CheckoutForm: React.FC<{
     closePopup: () => void;
