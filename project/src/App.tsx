@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { auth, db } from "./config/firebase";
 
-import Layout from "./components/layout/Layout/Layout";
+import Layout from "./components/Layout/Layout";
 import AuthRoute from "./routes/AuthRoute";
 import { RootState } from "./store";
 import { authActions } from "./store/auth-slice";
-import LoadingSpinner from "./UI/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 import ClientRoute from "./routes/ClientRoute";
 import CourierRoute from "./routes/CourierRoute";
 import RestaurantRoute from "./routes/RestaurantRoute";

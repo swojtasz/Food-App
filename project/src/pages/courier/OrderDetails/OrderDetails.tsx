@@ -7,7 +7,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { auth, db } from "../../../config/firebase";
 import { orderActions } from "../../../store/order-slice";
 import { OrderInfo } from "../../../types/OrderInfo";
-import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import Map from "../../../components/GoogleMap/SingleOrderMap";
 import AddressToCoordinates from "../../../components/GoogleMap/AddressToCoordinates";
 

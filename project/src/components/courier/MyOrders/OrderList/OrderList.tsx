@@ -1,6 +1,6 @@
 import classes from "./styles.module.scss";
 import { OrderInfo } from "../../../../types/OrderInfo";
-import LoadingSpinner from "../../../../UI/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../../../components/LoadingSpinner/LoadingSpinner";
 import OrderItem from "../OrderItem/OrderItem";
 
 const OrderList: React.FC<{ orderList: OrderInfo[] }> = (props) => {

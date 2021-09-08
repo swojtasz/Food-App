@@ -6,7 +6,7 @@ import ShowMenuItemComponent from "../../components/client/ShowMenuItem/ShowMenu
 import { db } from "../../config/firebase";
 import { Menu } from "../../types/Menu";
 import { RestaurantInfo } from "../../types/RestaurantInfo";
-import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const ShowMenuItem: React.FC = () => {
     const [menu, setMenu] = useState<Menu[]>([]);

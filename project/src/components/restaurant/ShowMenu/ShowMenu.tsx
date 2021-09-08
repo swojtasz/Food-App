@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import ShowMenuItem from "../ShowMenuItem/ShowMenuItem";
-import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 import { auth, db } from "../../../config/firebase";
 import { Menu } from "../../../types/Menu";
 

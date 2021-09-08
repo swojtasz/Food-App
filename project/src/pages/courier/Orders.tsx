@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import OrderList from "../../components/courier/Orders/OrderList/OrderList";
 import { db } from "../../config/firebase";
 import { OrderInfo } from "../../types/OrderInfo";
-import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { orderActions } from "../../store/order-slice";

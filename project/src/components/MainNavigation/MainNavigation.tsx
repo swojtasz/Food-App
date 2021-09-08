@@ -3,9 +3,9 @@ import classes from "./styles.module.scss";
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { RootState } from "../../../store";
-import { auth } from "../../../config/firebase";
-import { authActions } from "../../../store/auth-slice";
+import { RootState } from "../../store";
+import { auth } from "../../config/firebase";
+import { authActions } from "../../store/auth-slice";
 
 const MainNavigation: React.FC = () => {
     const isLoading = useSelector((state: RootState) => state.auth.isLoading);
