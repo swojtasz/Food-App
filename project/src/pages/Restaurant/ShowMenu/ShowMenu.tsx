@@ -1,4 +1,4 @@
-import ShowMenuComponent from "../../../components/restaurant/ShowMenu/ShowMenu";
+import ShowMenuComponent from "../components/ShowMenu/ShowMenu";
 
 const ShowMenu: React.FC = () => {
     return <ShowMenuComponent />;

@@ -1,4 +1,4 @@
-import AddMenuItemComponent from "../../../components/restaurant/AddMenuItem/AddMenuItem";
+import AddMenuItemComponent from "../components/AddMenuItem/AddMenuItem";
 
 const AddMenuItem: React.FC = () => {
     return <AddMenuItemComponent />;

@@ -13,7 +13,7 @@ const AuthRoute: React.FC = (props) => {
             <Route path="/" exact>
                 <NotLoggedView />
             </Route>
-            <Route path="/login">
+            <Route path="/login" exact>
                 <Login />
             </Route>
             <Route path="/register" exact>

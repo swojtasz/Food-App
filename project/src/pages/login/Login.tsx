@@ -2,7 +2,7 @@ import classes from "./styles.module.scss";
 
 import { Link } from "react-router-dom";
 
-import LoginForm from "../../components/login/LoginForm";
+import LoginForm from "./components/LoginForm/LoginForm";
 
 const Login: React.FC = (props) => {
     return (

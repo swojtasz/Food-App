@@ -6,7 +6,7 @@ import { RootState } from "../../../store";
 import { orderActions } from "../../../store/order-slice";
 import { OrderInfo } from "../../../types/OrderInfo";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
-import OrderList from "../../../components/courier/MyOrders/OrderList/OrderList";
+import OrderList from "../components/MyOrders/OrderList/OrderList";
 import MyOrdersMap from "../../../components/GoogleMap/MyOrdersMap";
 import AddressToCoordinates from "../../../utils/AddressToCoordinates";
 

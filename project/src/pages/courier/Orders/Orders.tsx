@@ -1,6 +1,6 @@
 import classes from "./styles.module.scss";
 import { useEffect, useState } from "react";
-import OrderList from "../../../components/courier/Orders/OrderList/OrderList";
+import OrderList from "../components/Orders/OrderList/OrderList";
 import { db } from "../../../config/firebase";
 import { OrderInfo } from "../../../types/OrderInfo";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";

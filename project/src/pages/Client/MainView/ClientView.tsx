@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { Menu } from "../../../types/Menu";
 import { Restaurant } from "../../../types/Restaurant";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
-import ShowMenu from "../../../components/client/ShowMenu/ShowMenu";
+import ShowMenu from "../components/ShowMenu/ShowMenu";
 import { db } from "../../../config/firebase";
 
 const ClientView: React.FC = () => {

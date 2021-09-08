@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import ShowMenuItemComponent from "../../../components/client/ShowMenuItem/ShowMenuItem";
+import ShowMenuItemComponent from "../components/ShowMenuItem/ShowMenuItem";
 import { db } from "../../../config/firebase";
 import { Menu } from "../../../types/Menu";
 import { RestaurantInfo } from "../../../types/RestaurantInfo";

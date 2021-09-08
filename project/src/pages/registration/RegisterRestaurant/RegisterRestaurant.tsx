@@ -1,7 +1,7 @@
 import classes from "../styles.module.scss";
 
 import { Link } from "react-router-dom";
-import RestaurantForm from "../../../components/register/RestaurantForm/RestaurantForm";
+import RestaurantForm from "../components/RestaurantForm/RestaurantForm";
 
 const RegisterRestaurant: React.FC = (props) => {
     return (
