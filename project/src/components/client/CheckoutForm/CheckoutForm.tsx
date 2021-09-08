@@ -86,15 +86,11 @@ const CheckoutForm: React.FC<{
             <div className={classes.bottom}>
                 <button
                     onClick={props.closePopup}
-                    style={{ backgroundColor: "darkred" }}
+                    style={{ backgroundColor: "red" }}
                 >
                     Anuluj
                 </button>
-                <button
-                    type="submit"
-                    disabled={isLoading}
-                    style={{ backgroundColor: "darkgreen" }}
-                >
+                <button type="submit" disabled={isLoading}>
                     Potwierdź zamówienie
                 </button>
             </div>

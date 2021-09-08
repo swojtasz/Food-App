@@ -54,7 +54,9 @@ const Order: React.FC<{ restaurantInfo: RestaurantInfo }> = (props) => {
                         <>
                             <button
                                 onClick={handleClosePopup}
-                                style={{ backgroundColor: "darkred" }}
+                                style={{
+                                    backgroundColor: "red",
+                                }}
                             >
                                 Anuluj
                             </button>
