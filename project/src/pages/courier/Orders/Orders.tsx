@@ -9,15 +9,13 @@ import { RootState } from "../../../store";
 import { orderActions } from "../../../store/order-slice";
 
 const Orders: React.FC = () => {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [orders, setOrders] = useState<OrderInfo[]>([]);
 
     const refetch = useSelector((state: RootState) => state.order.refetchList);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setIsLoading(true);
-
         db.ref("orders")
             .get()
             .then((snapshot) => {
@@ -33,14 +31,14 @@ const Orders: React.FC = () => {
                     }
                     setOrders(ordersArray);
                     setIsLoading(false);
+                    dispatch(orderActions.setRefetchList(false));
                 }
             })
             .catch((error) => {
+                dispatch(orderActions.setRefetchList(false));
                 setIsLoading(false);
                 console.log(error);
             });
-
-        dispatch(orderActions.setRefetchList(false));
     }, [refetch, dispatch]);
 
     if (isLoading) {
@@ -55,11 +53,7 @@ const Orders: React.FC = () => {
             </div>
         );
     } else {
-        return (
-            <h1 style={{ color: "white" }}>
-                Brak możliwych zleceń do przyjęcia
-            </h1>
-        );
+        return <h1>Brak możliwych zleceń do przyjęcia</h1>;
     }
 };
 

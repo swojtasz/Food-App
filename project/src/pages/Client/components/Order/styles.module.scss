@@ -22,7 +22,6 @@
         height: 80%;
         padding: 20px;
         border-radius: 5px;
-        font-weight: bolder;
         .bottom {
             margin-top: auto;
             display: flex;
@@ -36,19 +35,20 @@
             width: 100%;
             padding: 0;
             margin: 0;
+            color: $textColor;
         }
         .helper {
             display: flex;
             justify-content: space-between;
             margin-left: 1rem;
             margin-right: 1rem;
+            font-weight: bold;
         }
         li {
             list-style: none;
             display: flex;
             justify-content: space-between;
             margin: 0 1rem;
-            font-weight: lighter;
         }
         p {
             padding: 0;

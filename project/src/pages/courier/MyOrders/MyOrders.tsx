@@ -87,11 +87,7 @@ const MyOrders: React.FC = () => {
             </div>
         );
     } else {
-        return (
-            <h1 style={{ color: "white" }}>
-                Brak możliwych zleceń do przyjęcia
-            </h1>
-        );
+        return <h1>Brak możliwych zleceń do przyjęcia</h1>;
     }
 };
 

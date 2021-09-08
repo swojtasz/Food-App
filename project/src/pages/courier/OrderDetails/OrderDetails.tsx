@@ -31,13 +31,12 @@ const OrderDetails: React.FC = () => {
             restaurantAddress: string,
             clientAddress: string
         ) => {
-            setIsLoading(false);
-
             const restaurant = await AddressToCoordinates([restaurantAddress]);
             const client = await AddressToCoordinates([clientAddress]);
 
             setRestaurantLatLng(restaurant[0]);
             setClientLatLng(client[0]);
+            setIsLoading(false);
         };
 
         db.ref(`orders/${id}`)
@@ -55,7 +54,6 @@ const OrderDetails: React.FC = () => {
                             .restaurantAddress,
                         snapshot.val().clientInfo.address
                     );
-                    setIsLoading(false);
                 }
             })
             .catch((error) => {
@@ -112,7 +110,7 @@ const OrderDetails: React.FC = () => {
             </div>
         );
     } else {
-        return <h1 style={{ color: "white" }}>No details</h1>;
+        return <h1>No details</h1>;
     }
 };
 
