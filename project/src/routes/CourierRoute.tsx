@@ -1,9 +1,9 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import MyOrders from "../pages/courier/MyOrders";
-import OrderDetails from "../pages/courier/OrderDetails/OrderDetails";
-import Orders from "../pages/courier/Orders";
-import CourierView from "../pages/main-views/CourierView/CourierView";
+import MyOrders from "../pages/Courier/MyOrders/MyOrders";
+import OrderDetails from "../pages/Courier/OrderDetails/OrderDetails";
+import Orders from "../pages/Courier/Orders/Orders";
+import CourierView from "../pages/Courier/MainView/CourierView";
 
 const CourierRoute: React.FC = (props) => {
     return (

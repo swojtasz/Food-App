@@ -1,8 +1,8 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import RestaurantView from "../pages/main-views/RestaurantView/RestaurantView";
-import AddMenuItem from "../pages/restaurant/AddMenuItem";
-import ShowMenu from "../pages/restaurant/ShowMenu";
+import RestaurantView from "../pages/Restaurant/MainView/RestaurantView";
+import AddMenuItem from "../pages/Restaurant/AddMenuItem/AddMenuItem";
+import ShowMenu from "../pages/Restaurant/ShowMenu/ShowMenu";
 
 const RestaurantRoute: React.FC = (props) => {
     return (

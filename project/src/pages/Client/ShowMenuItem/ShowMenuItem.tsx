@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import ShowMenuItemComponent from "../../components/client/ShowMenuItem/ShowMenuItem";
-import { db } from "../../config/firebase";
-import { Menu } from "../../types/Menu";
-import { RestaurantInfo } from "../../types/RestaurantInfo";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import ShowMenuItemComponent from "../../../components/client/ShowMenuItem/ShowMenuItem";
+import { db } from "../../../config/firebase";
+import { Menu } from "../../../types/Menu";
+import { RestaurantInfo } from "../../../types/RestaurantInfo";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
 const ShowMenuItem: React.FC = () => {
     const [menu, setMenu] = useState<Menu[]>([]);

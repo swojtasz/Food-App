@@ -1,5 +1,5 @@
-import { LocalizationUsage } from "../../types/LocalizationUsage";
-import { MapPoint } from "../../types/MapPoint";
+import { LocalizationUsage } from "../types/LocalizationUsage";
+import { MapPoint } from "../types/MapPoint";
 import GetDurations from "./GetDurations";
 import { cloneDeep } from "lodash";
 

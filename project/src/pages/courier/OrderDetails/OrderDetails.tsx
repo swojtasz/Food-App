@@ -9,7 +9,7 @@ import { orderActions } from "../../../store/order-slice";
 import { OrderInfo } from "../../../types/OrderInfo";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import Map from "../../../components/GoogleMap/SingleOrderMap";
-import AddressToCoordinates from "../../../components/GoogleMap/AddressToCoordinates";
+import AddressToCoordinates from "../../../utils/AddressToCoordinates";
 
 const OrderDetails: React.FC = () => {
     const params = useParams<{ id?: string }>();

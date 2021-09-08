@@ -4,8 +4,8 @@ import { useState } from "react";
 import { LocalizationUsage } from "../../types/LocalizationUsage";
 import { MapPoint } from "../../types/MapPoint";
 import { OptimalCostAndRoute } from "../../types/OptimalCostAndRoute";
-import CreateChildren from "./CreateChildren";
-import Traverse from "./Traverse";
+import CreateChildren from "../../utils/CreateChildren";
+import Traverse from "../../utils/Traverse";
 
 const MyOrdersMap: React.FC<{
     restaurantMarkers: google.maps.LatLngLiteral[];

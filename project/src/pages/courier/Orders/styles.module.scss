@@ -1,0 +1,14 @@
+@import "/src/variables";
+
+.orders {
+    width: 100%;
+    background-color: $backgroundColor;
+    box-shadow: 0 1px 150px rgba(255, 255, 255, 1);
+    border-radius: 25px;
+    padding: 1rem;
+    .header {
+        color: $textColor;
+        text-align: center;
+        padding: 0;
+    }
+}

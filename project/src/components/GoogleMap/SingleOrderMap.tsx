@@ -1,7 +1,7 @@
 import { DirectionsRenderer, GoogleMap } from "@react-google-maps/api";
 import { useEffect } from "react";
 import { useState } from "react";
-import GetDurations from "./GetDurations";
+import GetDurations from "../../utils/GetDurations";
 
 const SingleOrderMap: React.FC<{
     restaurantMarker: google.maps.LatLngLiteral;

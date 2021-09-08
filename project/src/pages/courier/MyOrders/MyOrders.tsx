@@ -1,14 +1,14 @@
 import classes from "./styles.module.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { auth, db } from "../../config/firebase";
-import { RootState } from "../../store";
-import { orderActions } from "../../store/order-slice";
-import { OrderInfo } from "../../types/OrderInfo";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import OrderList from "../../components/courier/MyOrders/OrderList/OrderList";
-import MyOrdersMap from "../../components/GoogleMap/MyOrdersMap";
-import AddressToCoordinates from "../../components/GoogleMap/AddressToCoordinates";
+import { auth, db } from "../../../config/firebase";
+import { RootState } from "../../../store";
+import { orderActions } from "../../../store/order-slice";
+import { OrderInfo } from "../../../types/OrderInfo";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
+import OrderList from "../../../components/courier/MyOrders/OrderList/OrderList";
+import MyOrdersMap from "../../../components/GoogleMap/MyOrdersMap";
+import AddressToCoordinates from "../../../utils/AddressToCoordinates";
 
 const MyOrders: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);

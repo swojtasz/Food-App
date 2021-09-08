@@ -1,11 +1,11 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Login from "../pages/login/Login";
-import NotLoggedView from "../pages/main-views/NotLoggedView/NotLoggedView";
-import Register from "../pages/registration/Register/Register";
-import RegisterClient from "../pages/registration/RegisterClient/RegisterClient";
-import RegisterCourier from "../pages/registration/RegisterCourier/RegisterCourier";
-import RegisterRestaurant from "../pages/registration/RegisterRestaurant/RegisterRestaurant";
+import Login from "../pages/Login/Login";
+import NotLoggedView from "../pages/NotLoggedView/NotLoggedView";
+import Register from "../pages/Registration/Register/Register";
+import RegisterClient from "../pages/Registration/RegisterClient/RegisterClient";
+import RegisterCourier from "../pages/Registration/RegisterCourier/RegisterCourier";
+import RegisterRestaurant from "../pages/Registration/RegisterRestaurant/RegisterRestaurant";
 
 const AuthRoute: React.FC = (props) => {
     return (

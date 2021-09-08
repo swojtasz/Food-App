@@ -1,6 +1,6 @@
 import { cloneDeep } from "lodash";
-import { MapPoint } from "../../types/MapPoint";
-import { OptimalCostAndRoute } from "../../types/OptimalCostAndRoute";
+import { MapPoint } from "../types/MapPoint";
+import { OptimalCostAndRoute } from "../types/OptimalCostAndRoute";
 
 const Traverse = async (
     node: MapPoint,
