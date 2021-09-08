@@ -1,4 +1,4 @@
-@import "/src/variables";
+@import "/src/styles/base";
 
 .form {
     display: flex;
@@ -10,13 +10,14 @@
         margin-bottom: 0.5rem;
         padding: 1rem;
     }
-    input {
-        width: max-content;
-        font-size: 1rem;
-        padding: 0.5rem;
-        border-radius: 4px;
-        margin-bottom: 1rem;
-        border-color: black;
+    .number {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        input {
+            @include inputMixin;
+        }
     }
     .bottom {
         margin-top: auto;

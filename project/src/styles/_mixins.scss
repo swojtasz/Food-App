@@ -1,0 +1,11 @@
+@mixin inputMixin {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.9rem;
+    color: $textColor;
+    background-color: white;
+    border: solid 2px $textColor;
+    font-size: inherit;
+    font-family: inherit;
+    border-radius: 5px;
+}

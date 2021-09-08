@@ -74,7 +74,7 @@ const CheckoutForm: React.FC<{
                 <label htmlFor="address">Adres dostawy:</label>
                 <PlacesAutocompleteComponent onSetAddress={onSetAddress} />
             </div>
-            <div>
+            <div className={classes.number}>
                 <label htmlFor="number">Numer telefonu:</label>
                 <input
                     type="text"
@@ -98,7 +98,7 @@ const CheckoutForm: React.FC<{
                     disabled={isLoading}
                     style={{ backgroundColor: "#006600" }}
                 >
-                    Potwierdź zamówienie
+                    Potwierdź
                 </Button>
             </div>
         </form>

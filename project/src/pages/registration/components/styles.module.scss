@@ -1,4 +1,4 @@
-@import "/src/variables";
+@import "/src/styles/base";
 
 .form {
     margin: auto;
@@ -15,14 +15,7 @@
             font-weight: normal;
         }
         input {
-            display: block;
-            width: 100%;
-            font: inherit;
-            font-size: 1rem;
-            padding: 0.5rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            border-color: white;
+            @include inputMixin;
         }
     }
 }
