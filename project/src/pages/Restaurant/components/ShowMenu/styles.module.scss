@@ -1,7 +1,10 @@
+@import "/src/variables";
+
 .meals {
     width: 100%;
     border-radius: 25px;
-    color: white;
+    color: $textColor;
+    background: $backgroundColor;
     box-shadow: 0 1px 150px rgba(255, 255, 255, 1);
     border-radius: 25px;
     ul {

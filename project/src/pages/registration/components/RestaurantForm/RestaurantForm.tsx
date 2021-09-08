@@ -6,7 +6,8 @@ import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { auth, db } from "../../../../config/firebase";
 import { authActions } from "../../../../store/auth-slice";
-import PlacesAutocompleteComponent from "../../../../components/GoogleMap/PlacesAutocomplete";
+import PlacesAutocompleteComponent from "../../../../components/GoogleMap/PlacesAutocomplete/PlacesAutocomplete";
+import Button from "../../../../components/Button/Button";
 
 const RestaurantForm: React.FC = () => {
     const nameRef = useRef<HTMLInputElement>(null);
@@ -86,7 +87,7 @@ const RestaurantForm: React.FC = () => {
                 <label htmlFor="address">Adres</label>
                 <PlacesAutocompleteComponent onSetAddress={onSetAddress} />
             </div>
-            <button type="submit">Zarejestruj</button>
+            <Button type="submit">Zarejestruj</Button>
             {error && <p className={classes.error}>{error}</p>}
         </form>
     );

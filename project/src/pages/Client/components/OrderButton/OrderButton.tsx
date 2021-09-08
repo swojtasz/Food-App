@@ -6,6 +6,7 @@ import { RootState } from "../../../../store";
 import { orderActions } from "../../../../store/order-slice";
 import { useState } from "react";
 import { useEffect } from "react";
+import Button from "../../../../components/Button/Button";
 
 const OrderButton: React.FC = () => {
     const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const OrderButton: React.FC = () => {
 
     return (
         <div className={btnClasses}>
-            <button onClick={setPopupToTrue}>Koszyk: {totalPrice}zł</button>
+            <Button onClick={setPopupToTrue}>Koszyk: {totalPrice}zł</Button>
         </div>
     );
 };

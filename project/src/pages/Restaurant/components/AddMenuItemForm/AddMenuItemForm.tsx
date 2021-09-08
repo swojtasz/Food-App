@@ -2,6 +2,7 @@ import classes from "./styles.module.scss";
 
 import { useState } from "react";
 import { auth, db } from "../../../../config/firebase";
+import Button from "../../../../components/Button/Button";
 
 const AddMenuItemForm: React.FC<{ setPopup: () => void }> = (props) => {
     const [name, setName] = useState<string>("");
@@ -74,9 +75,9 @@ const AddMenuItemForm: React.FC<{ setPopup: () => void }> = (props) => {
                     onChange={onSetPrice}
                     value={price}
                 />
-                <button type="submit" disabled={isLoading}>
+                <Button type="submit" disabled={isLoading}>
                     Dodaj
-                </button>
+                </Button>
             </form>
         </>
     );

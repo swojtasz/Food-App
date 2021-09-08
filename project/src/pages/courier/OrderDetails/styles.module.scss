@@ -15,25 +15,9 @@
             margin: 0;
             font-size: x-large;
         }
-        button {
-            margin: 0;
-            margin-bottom: 2rem;
-            margin-top: 0.5rem;
-            font: inherit;
-            background-color: $textColor;
-            border: none;
-            color: $backgroundColor;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: small;
-            transition: 0.3s;
-            &:hover {
-                transform: scale(1.1);
-            }
-        }
         .container {
             width: 33.333%;
+            margin-bottom: 1rem;
         }
     }
 }

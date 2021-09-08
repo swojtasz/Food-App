@@ -3,8 +3,9 @@ import { useHistory } from "react-router";
 import { db } from "../../../../config/firebase";
 import { Order } from "../../../../types/Order";
 import { RestaurantInfo } from "../../../../types/RestaurantInfo";
-import PlacesAutocompleteComponent from "../../../../components/GoogleMap/PlacesAutocomplete";
+import PlacesAutocompleteComponent from "../../../../components/GoogleMap/PlacesAutocomplete/PlacesAutocomplete";
 import classes from "./styles.module.scss";
+import Button from "../../../../components/Button/Button";
 
 const CheckoutForm: React.FC<{
     closePopup: () => void;
@@ -84,15 +85,21 @@ const CheckoutForm: React.FC<{
             </div>
             {isError && <p>{isError}</p>}
             <div className={classes.bottom}>
-                <button
+                <Button
                     onClick={props.closePopup}
-                    style={{ backgroundColor: "red" }}
+                    style={{
+                        backgroundColor: "#bd0000",
+                    }}
                 >
                     Anuluj
-                </button>
-                <button type="submit" disabled={isLoading}>
+                </Button>
+                <Button
+                    type="submit"
+                    disabled={isLoading}
+                    style={{ backgroundColor: "#006600" }}
+                >
                     Potwierdź zamówienie
-                </button>
+                </Button>
             </div>
         </form>
     );

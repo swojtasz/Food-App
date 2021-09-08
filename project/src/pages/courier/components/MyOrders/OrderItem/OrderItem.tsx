@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { db } from "../../../../../config/firebase";
 import { orderActions } from "../../../../../store/order-slice";
 import { OrderInfo } from "../../../../../types/OrderInfo";
+import Button from "../../../../../components/Button/Button";
 
 const OrderItem: React.FC<{ order: OrderInfo }> = (props) => {
     const dispatch = useDispatch();
@@ -38,9 +39,9 @@ const OrderItem: React.FC<{ order: OrderInfo }> = (props) => {
                 <div className={classes.container}>
                     <h1>Średni czas przejazdu</h1>
                     <p> 10 minut</p>
-                    <button onClick={orderAcceptHandler}>
+                    <Button onClick={orderAcceptHandler}>
                         Zakończ zlecenie
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>

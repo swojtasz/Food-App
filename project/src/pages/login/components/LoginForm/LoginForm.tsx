@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { auth } from "../../../../config/firebase";
 import { authActions } from "../../../../store/auth-slice";
+import Button from "../../../../components/Button/Button";
 
 const LoginForm: React.FC = () => {
     const emailRef = useRef<HTMLInputElement>(null);
@@ -46,7 +47,7 @@ const LoginForm: React.FC = () => {
                 <label htmlFor="password">Hasło</label>
                 <input type="password" id="password" ref={passwordRef} />
             </div>
-            <button type="submit">Zaloguj</button>
+            <Button type="submit">Zaloguj</Button>
             {error && <p className={classes.error}>{error}</p>}
         </form>
     );

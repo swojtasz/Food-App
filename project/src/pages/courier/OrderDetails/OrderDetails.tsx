@@ -10,6 +10,7 @@ import { OrderInfo } from "../../../types/OrderInfo";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import Map from "../../../components/GoogleMap/SingleOrderMap";
 import AddressToCoordinates from "../../../utils/AddressToCoordinates";
+import Button from "../../../components/Button/Button";
 
 const OrderDetails: React.FC = () => {
     const params = useParams<{ id?: string }>();
@@ -99,9 +100,9 @@ const OrderDetails: React.FC = () => {
                     <div className={classes.container}>
                         <h1>Średni czas przejazdu</h1>
                         <p> 10 minut</p>
-                        <button onClick={acceptOrderHandler}>
+                        <Button onClick={acceptOrderHandler}>
                             Akceptuj zlecenie
-                        </button>
+                        </Button>
                     </div>
                 </div>
                 <Map

@@ -6,6 +6,7 @@ import { useHistory } from "react-router";
 import { auth, db } from "../../../../config/firebase";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../../store/auth-slice";
+import Button from "../../../../components/Button/Button";
 
 const RegisterForm: React.FC<{ type: string }> = (props) => {
     const emailRef = useRef<HTMLInputElement>(null);
@@ -59,7 +60,7 @@ const RegisterForm: React.FC<{ type: string }> = (props) => {
                 <label htmlFor="phone">Numer Telefonu</label>
                 <input type="text" id="phone" ref={phoneNumberRef} />
             </div>
-            <button type="submit">Zarejestruj</button>
+            <Button type="submit">Zarejestruj</Button>
             {error && <p className={classes.error}>{error}</p>}
         </form>
     );

@@ -25,13 +25,13 @@
         }
         .buttons button {
             background-color: $backgroundColor;
-            border: none;
+            border: black 1px solid;
             padding: 0.4rem 1rem;
             margin-left: 1rem;
             color: $textColor;
             cursor: pointer;
             padding: 0.5rem 2rem;
-            border-radius: 20px;
+            border-radius: 10px;
         }
     }
     ul {

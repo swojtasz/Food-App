@@ -7,6 +7,7 @@ import { orderActions } from "../../../../store/order-slice";
 import { useState } from "react";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import { RestaurantInfo } from "../../../../types/RestaurantInfo";
+import Button from "../../../../components/Button/Button";
 
 const Order: React.FC<{ restaurantInfo: RestaurantInfo }> = (props) => {
     const dispatch = useDispatch();
@@ -52,17 +53,22 @@ const Order: React.FC<{ restaurantInfo: RestaurantInfo }> = (props) => {
                 {!isCheckouting && (
                     <div className={classes.bottom}>
                         <>
-                            <button
+                            <Button
                                 onClick={handleClosePopup}
                                 style={{
-                                    backgroundColor: "red",
+                                    backgroundColor: "#bd0000",
                                 }}
                             >
                                 Anuluj
-                            </button>
-                            <button onClick={handleCheckout}>
+                            </Button>
+                            <Button
+                                onClick={handleCheckout}
+                                style={{
+                                    backgroundColor: "#006600",
+                                }}
+                            >
                                 Zamów: {totalCost}zł
-                            </button>
+                            </Button>
                         </>
                     </div>
                 )}

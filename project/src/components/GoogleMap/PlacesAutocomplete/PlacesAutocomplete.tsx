@@ -1,3 +1,4 @@
+import classes from "./styles.module.scss";
 import PlacesAutocomplete from "react-places-autocomplete";
 import { useState } from "react";
 
@@ -27,7 +28,10 @@ const PlacesAutocompleteComponent: React.FC<{
                 loading,
             }) => (
                 <div style={{ maxHeight: "7rem", overflow: "auto" }}>
-                    <input {...getInputProps({})} />
+                    <input
+                        className={classes.placesInput}
+                        {...getInputProps({})}
+                    />
                     <div>
                         {loading && <p>Loading...</p>}
                         {suggestions.map((suggestion, suggestionId) => {
