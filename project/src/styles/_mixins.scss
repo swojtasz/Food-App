@@ -9,3 +9,9 @@
     font-family: inherit;
     border-radius: 5px;
 }
+
+@mixin errorMixin {
+    padding-top: 1rem;
+    color: darkred;
+    font-size: larger;
+}

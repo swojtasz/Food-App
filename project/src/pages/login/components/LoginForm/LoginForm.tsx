@@ -18,7 +18,6 @@ const LoginForm: React.FC = () => {
 
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
-
         setError(null);
 
         const loginProps = {
@@ -26,10 +25,9 @@ const LoginForm: React.FC = () => {
             password: passwordRef.current!.value,
         };
 
-        dispatch(authActions.setIsLoading(true));
-
         auth.signInWithEmailAndPassword(loginProps.email, loginProps.password)
             .then((result) => {
+                dispatch(authActions.setIsLoading(true));
                 history.push("/");
             })
             .catch((error) => {

@@ -20,6 +20,7 @@ const RegisterForm: React.FC<{ type: string }> = (props) => {
 
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
+        setError(null);
 
         const password = passwordRef.current!.value;
         const registrationProps = {
@@ -28,10 +29,14 @@ const RegisterForm: React.FC<{ type: string }> = (props) => {
             userType: props.type,
         };
 
-        dispatch(authActions.setIsLoading(true));
+        if (registrationProps.phoneNumber.trim().length < 9) {
+            setError("Failed to sign up!");
+            return;
+        }
 
         auth.createUserWithEmailAndPassword(registrationProps.email, password)
             .then((result) => {
+                dispatch(authActions.setIsLoading(true));
                 db.ref(`users/${result.user!.uid}`)
                     .set(registrationProps)
                     .catch((error) => {
@@ -42,7 +47,7 @@ const RegisterForm: React.FC<{ type: string }> = (props) => {
                 history.push("/");
             })
             .catch(() => {
-                setError("Failed to sign up with email and password!");
+                setError("Failed to sign up!");
             });
     };
 

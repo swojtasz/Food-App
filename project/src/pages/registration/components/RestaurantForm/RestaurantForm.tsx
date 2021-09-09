@@ -14,7 +14,7 @@ const RestaurantForm: React.FC = () => {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const phoneNumberRef = useRef<HTMLInputElement>(null);
-    const [address, setAddress] = useState<string>();
+    const [address, setAddress] = useState<string>("");
 
     const [error, setError] = useState<null | string>(null);
 
@@ -27,9 +27,9 @@ const RestaurantForm: React.FC = () => {
 
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
+        setError(null);
 
         const password = passwordRef.current!.value;
-
         const registrationProps = {
             name: nameRef.current!.value,
             email: emailRef.current!.value,
@@ -38,10 +38,18 @@ const RestaurantForm: React.FC = () => {
             userType: "restaurant",
         };
 
-        dispatch(authActions.setIsLoading(true));
+        if (
+            registrationProps.phoneNumber.trim().length < 9 ||
+            registrationProps.address!.trim().length === 0 ||
+            registrationProps.name!.trim().length === 0
+        ) {
+            setError("Failed to sign up!");
+            return;
+        }
 
         auth.createUserWithEmailAndPassword(registrationProps.email, password)
             .then((result) => {
+                dispatch(authActions.setIsLoading(true));
                 db.ref(`users/${result.user!.uid}`)
                     .set(registrationProps)
                     .catch((error) => {
@@ -61,7 +69,7 @@ const RestaurantForm: React.FC = () => {
                 history.push("/");
             })
             .catch(() => {
-                setError("Failed to sign up with email and password!");
+                setError("Failed to sign up!");
             });
     };
 

@@ -12,10 +12,12 @@
         label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: normal;
         }
         input {
             @include inputMixin;
         }
+    }
+    .error {
+        @include errorMixin;
     }
 }
