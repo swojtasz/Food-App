@@ -4,11 +4,12 @@ import { useState } from "react";
 import { auth, db } from "../../../../config/firebase";
 import Button from "../../../../components/Button/Button";
 
-const AddMenuItemForm: React.FC<{ setPopup: () => void }> = (props) => {
+const AddMenuItemForm: React.FC = () => {
     const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [price, setPrice] = useState<string>("");
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<null | string>(null);
 
     const onSetName = (name: React.ChangeEvent<HTMLInputElement>) => {
         setName(name.target.value);
@@ -22,12 +23,20 @@ const AddMenuItemForm: React.FC<{ setPopup: () => void }> = (props) => {
         setPrice(price.target.value);
     };
 
-    const [isError, setIsError] = useState<string | null>(null);
-
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
-
+        setError(null);
         setIsLoading(true);
+
+        if (
+            name.trim().length === 0 ||
+            description.trim().length === 0 ||
+            price.trim().length === 0 ||
+            !price.match(/^[0-9]+$/)
+        ) {
+            setError("Nie udało się dodać zamówienia");
+            return;
+        }
 
         db.ref(`menu/${auth.currentUser?.uid}/menu/${name}`)
             .set({
@@ -36,15 +45,10 @@ const AddMenuItemForm: React.FC<{ setPopup: () => void }> = (props) => {
                 price: price,
             })
             .catch((error) => {
-                setIsError(error.message);
                 console.log(error);
             });
 
         setIsLoading(false);
-
-        if (isError === null) {
-            props.setPopup();
-        }
 
         setName("");
         setDescription("");
@@ -78,6 +82,7 @@ const AddMenuItemForm: React.FC<{ setPopup: () => void }> = (props) => {
                 <Button type="submit" disabled={isLoading}>
                     Dodaj
                 </Button>
+                {error && <p className={classes.error}>{error}</p>}
             </form>
         </>
     );

@@ -12,7 +12,7 @@ const CheckoutForm: React.FC<{
     order: Order[];
     restaurantInfo: RestaurantInfo;
 }> = (props) => {
-    const [isError, setIsError] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
     const [address, setAddress] = useState<string>();
     const [phoneNumber, setPhoneNumber] = useState<string>();
     const [isLoading, setIsLoading] = useState(false);
@@ -29,13 +29,17 @@ const CheckoutForm: React.FC<{
 
     const formSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
+        setError(null);
 
-        if (address && address.trim().length === 0) {
-            setIsError("Błąd! Podaj adres dostawy"!);
-            return;
-        }
-        if (phoneNumber && phoneNumber.trim().length === 0) {
-            setIsError("Błąd! Podaj numer telefonu!");
+        if (
+            !address ||
+            !phoneNumber ||
+            address.trim().length === 0 ||
+            phoneNumber.trim().length === 0 ||
+            !phoneNumber.match(/^[0-9]+$/)
+        ) {
+            console.log("siema");
+            setError("Nie udało się złożyć zamówienia");
             return;
         }
 
@@ -58,7 +62,7 @@ const CheckoutForm: React.FC<{
                 history.push("/");
             })
             .catch((error) => {
-                setIsError(error.message);
+                setError(error.message);
                 console.log(error);
             });
 
@@ -83,7 +87,7 @@ const CheckoutForm: React.FC<{
                     value={phoneNumber}
                 />
             </div>
-            {isError && <p>{isError}</p>}
+            {error && <p className={classes.error}>{error}</p>}
             <div className={classes.bottom}>
                 <Button
                     onClick={props.closePopup}

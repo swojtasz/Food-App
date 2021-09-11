@@ -31,4 +31,7 @@
         display: flex;
         align-items: center;
     }
+    .error {
+        @include errorMixin;
+    }
 }
