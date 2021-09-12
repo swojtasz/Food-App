@@ -5,6 +5,7 @@ const durationsSlice = createSlice({
     initialState: {
         courierToRestaurantTime: 0,
         restaurantToClientTime: 0,
+        myOrdersTotalDuration: 0,
     },
     reducers: {
         setCourierToRestaurantTime(state, action) {
@@ -12,6 +13,9 @@ const durationsSlice = createSlice({
         },
         setRestaurantToClientTime(state, action) {
             state.restaurantToClientTime = action.payload;
+        },
+        setMyOrdersTotalDuration(state, action) {
+            state.myOrdersTotalDuration = action.payload;
         },
     },
 });

@@ -27,18 +27,12 @@ const OrderItem: React.FC<{ order: OrderInfo }> = (props) => {
                     <p>
                         {props.order.orderInfo.restaurantInfo.restaurantAddress}
                     </p>
+                </div>
+                <div className={classes.container}>
                     <h1>Miejsce docelowe</h1>
                     <p>{props.order.clientInfo.address}</p>
                 </div>
                 <div className={classes.container}>
-                    <h1>Czas odbioru</h1>
-                    <p>5 minut</p>
-                    <h1>Czas dostarczenia</h1>
-                    <p>5 minut</p>
-                </div>
-                <div className={classes.container}>
-                    <h1>Średni czas przejazdu</h1>
-                    <p> 10 minut</p>
                     <Button onClick={orderAcceptHandler}>
                         Zakończ zlecenie
                     </Button>

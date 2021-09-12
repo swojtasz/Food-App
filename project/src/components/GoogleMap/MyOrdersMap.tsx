@@ -1,6 +1,8 @@
 import { DirectionsRenderer, GoogleMap } from "@react-google-maps/api";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { durationsActions } from "../../store/durations-slice";
 import { LocalizationUsage } from "../../types/LocalizationUsage";
 import { MapPoint } from "../../types/MapPoint";
 import { OptimalCostAndRoute } from "../../types/OptimalCostAndRoute";
@@ -15,6 +17,8 @@ const MyOrdersMap: React.FC<{
         width: "100%",
         height: "30rem",
     };
+
+    const dispatch = useDispatch();
 
     const [currentLocation, setCurrentLocation] =
         useState<google.maps.LatLngLiteral>();
@@ -62,6 +66,15 @@ const MyOrdersMap: React.FC<{
                     0
                 );
                 setOptimals(optimalCostAndRoute);
+
+                const myOrdersTotalDuration = Math.floor(
+                    optimalCostAndRoute.cost / 60
+                );
+                dispatch(
+                    durationsActions.setMyOrdersTotalDuration(
+                        myOrdersTotalDuration
+                    )
+                );
             };
 
             countOptimals();
@@ -100,6 +113,7 @@ const MyOrdersMap: React.FC<{
         props.clientMarkers,
         props.restaurantMarkers,
         optimals,
+        dispatch,
     ]);
 
     return (
