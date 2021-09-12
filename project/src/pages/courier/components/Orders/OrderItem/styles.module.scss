@@ -6,11 +6,13 @@
         padding: 0.7rem 1rem;
         background-color: $backgroundColor;
         border-top: 2px;
+        align-items: center;
         .container {
-            width: 30%;
+            width: 40%;
         }
         .info {
-            width: 10%;
+            text-align: center;
+            width: 20%;
         }
         h1 {
             margin: 0;

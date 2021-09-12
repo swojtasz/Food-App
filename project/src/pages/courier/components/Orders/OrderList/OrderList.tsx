@@ -28,11 +28,7 @@ const OrderList: React.FC<{ orderList: OrderInfo[] }> = (props) => {
                     <div className={classes.header}>
                         <h1>Miejsce docelowe</h1>
                     </div>
-                    <div className={classes.header}>
-                        <h1>Średni czas przejazdu</h1>
-                    </div>
                 </div>
-
                 <ul>{orders}</ul>
             </div>
         );
