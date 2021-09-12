@@ -2,7 +2,7 @@ import classes from "./styles.module.scss";
 
 import { useState } from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { auth, db } from "../../../config/firebase";
 import { orderActions } from "../../../store/order-slice";
@@ -11,6 +11,7 @@ import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import Map from "../../../components/GoogleMap/SingleOrderMap";
 import AddressToCoordinates from "../../../utils/AddressToCoordinates";
 import Button from "../../../components/Button/Button";
+import { RootState } from "../../../store";
 
 const OrderDetails: React.FC = () => {
     const params = useParams<{ id?: string }>();
@@ -19,8 +20,15 @@ const OrderDetails: React.FC = () => {
 
     const dispatch = useDispatch();
 
-    const [order, setOrder] = useState<OrderInfo>();
+    const courierToRestaurantTime = useSelector(
+        (state: RootState) => state.durations.courierToRestaurantTime
+    );
+    const restaurantToClientTime = useSelector(
+        (state: RootState) => state.durations.restaurantToClientTime
+    );
+
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [order, setOrder] = useState<OrderInfo>();
     const [restaurantLatLng, setRestaurantLatLng] =
         useState<google.maps.LatLngLiteral>();
     const [clientLatLng, setClientLatLng] =
@@ -57,8 +65,8 @@ const OrderDetails: React.FC = () => {
                 }
             })
             .catch((error) => {
-                setIsLoading(false);
                 console.log("Failed to push user to Database!");
+                setIsLoading(false);
             });
     }, [id]);
 
@@ -91,13 +99,16 @@ const OrderDetails: React.FC = () => {
                     </div>
                     <div className={classes.container}>
                         <h1>Czas odbioru</h1>
-                        <p>5 minut</p>
+                        <p>{courierToRestaurantTime} minut</p>
                         <h1>Czas dostarczenia</h1>
-                        <p>5 minut</p>
+                        <p>{restaurantToClientTime} minut</p>
                     </div>
                     <div className={classes.container}>
                         <h1>Średni czas przejazdu</h1>
-                        <p> 10 minut</p>
+                        <p>
+                            {courierToRestaurantTime + restaurantToClientTime}{" "}
+                            minut
+                        </p>
                         <Button onClick={acceptOrderHandler}>
                             Akceptuj zlecenie
                         </Button>

@@ -1,6 +1,8 @@
 import { DirectionsRenderer, GoogleMap } from "@react-google-maps/api";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { durationsActions } from "../../store/durations-slice";
 import GetDurations from "../../utils/GetDurations";
 
 const SingleOrderMap: React.FC<{
@@ -12,14 +14,14 @@ const SingleOrderMap: React.FC<{
         height: "30rem",
     };
 
+    const dispatch = useDispatch();
+
     const [currentLocation, setCurrentLocation] =
         useState<google.maps.LatLngLiteral>();
     const [directions, setDirections] =
         useState<google.maps.DirectionsResult>();
-    const [duration, setDuration] = useState<number[]>([]);
 
     useEffect(() => {
-        // set current position
         if (!currentLocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 setCurrentLocation({
@@ -58,10 +60,22 @@ const SingleOrderMap: React.FC<{
             const destinations = [props.restaurantMarker, props.clientMarker];
 
             GetDurations(origins, destinations).then((value) => {
-                setDuration(value);
+                const courierToRestaurantTime = Math.floor(value[0] / 60);
+                const restaurantToClientTime = Math.floor(value[3] / 60);
+
+                dispatch(
+                    durationsActions.setCourierToRestaurantTime(
+                        courierToRestaurantTime
+                    )
+                );
+                dispatch(
+                    durationsActions.setRestaurantToClientTime(
+                        restaurantToClientTime
+                    )
+                );
             });
         }
-    }, [currentLocation, props.clientMarker, props.restaurantMarker]);
+    }, [currentLocation, props.clientMarker, props.restaurantMarker, dispatch]);
 
     return (
         <>
@@ -70,16 +84,8 @@ const SingleOrderMap: React.FC<{
                 zoom={17}
                 center={currentLocation}
             >
-                {/* <Marker position={props.restaurantMarker}></Marker>
-            <Marker position={props.clientMarker}></Marker> */}
                 {directions && <DirectionsRenderer directions={directions} />}
             </GoogleMap>
-            {duration && (
-                <>
-                    <p>Punkt A-B: {duration[0]}</p>
-                    <p>Punkt B-C: {duration[3]}</p>
-                </>
-            )}
         </>
     );
 };
