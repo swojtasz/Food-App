@@ -12,6 +12,9 @@
     input {
         @include inputMixin;
     }
+    p {
+        margin-top: 0.5rem;
+    }
     .error {
         @include errorMixin;
     }

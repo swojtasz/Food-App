@@ -7,20 +7,31 @@ import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { orderActions } from "../../../store/order-slice";
+import AvailableOrdersMap from "../../../components/GoogleMap/AvailableOrdersMap";
+import AddressToCoordinates from "../../../utils/AddressToCoordinates";
 
 const Orders: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [orders, setOrders] = useState<OrderInfo[]>([]);
+    const [orderMarkers, setOrderMarkers] = useState<
+        google.maps.LatLngLiteral[]
+    >([]);
 
     const refetch = useSelector((state: RootState) => state.order.refetchList);
     const dispatch = useDispatch();
 
     useEffect(() => {
+        const setCoordinates = async (orderMarkersArray: string[]) => {
+            setOrderMarkers(await AddressToCoordinates(orderMarkersArray));
+            setIsLoading(false);
+        };
+
         db.ref("orders")
             .get()
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     const ordersArray: OrderInfo[] = [];
+                    const orderMarkersArray: string[] = [];
                     for (const orderKey in snapshot.val()) {
                         ordersArray.push({
                             orderInfo: snapshot.val()[orderKey].orderInfo,
@@ -28,9 +39,21 @@ const Orders: React.FC = () => {
                             id: orderKey,
                             status: snapshot.val()[orderKey].status,
                         });
+                        if (
+                            snapshot.val()[orderKey].status === "active" &&
+                            !orderMarkersArray.includes(
+                                snapshot.val()[orderKey].orderInfo
+                                    .restaurantInfo.restaurantAddress
+                            )
+                        ) {
+                            orderMarkersArray.push(
+                                snapshot.val()[orderKey].orderInfo
+                                    .restaurantInfo.restaurantAddress
+                            );
+                        }
                     }
                     setOrders(ordersArray);
-                    setIsLoading(false);
+                    setCoordinates(orderMarkersArray);
                     dispatch(orderActions.setRefetchList(false));
                 }
             })
@@ -50,6 +73,7 @@ const Orders: React.FC = () => {
                     Zlecenia możliwe do przyjęcia
                 </h1>
                 <OrderList orderList={orders} />
+                <AvailableOrdersMap orderMarkers={orderMarkers} />
             </div>
         );
     } else {

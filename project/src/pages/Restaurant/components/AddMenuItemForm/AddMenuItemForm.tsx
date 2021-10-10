@@ -9,6 +9,7 @@ const AddMenuItemForm: React.FC = () => {
     const [description, setDescription] = useState<string>("");
     const [price, setPrice] = useState<string>("");
     const [isLoading, setIsLoading] = useState(false);
+    const [isAdded, setIsAdded] = useState(false);
     const [error, setError] = useState<null | string>(null);
 
     const onSetName = (name: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +54,7 @@ const AddMenuItemForm: React.FC = () => {
         setName("");
         setDescription("");
         setPrice("");
+        setIsAdded(true);
     };
 
     return (
@@ -82,6 +84,7 @@ const AddMenuItemForm: React.FC = () => {
                 <Button type="submit" disabled={isLoading}>
                     Dodaj
                 </Button>
+                {isAdded && <p>Pomyślnie dodano zamówienie!</p>}
                 {error && <p className={classes.error}>{error}</p>}
             </form>
         </>
