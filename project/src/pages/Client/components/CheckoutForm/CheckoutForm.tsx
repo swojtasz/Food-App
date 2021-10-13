@@ -44,8 +44,8 @@ const CheckoutForm: React.FC<{
         }
 
         setIsLoading(true);
-        db.ref(`orders`)
-            .push({
+        db.ref(`orders/${localStorage.getItem("userId")}`)
+            .update({
                 orderInfo: {
                     order: props.order,
                     restaurantInfo: props.restaurantInfo,

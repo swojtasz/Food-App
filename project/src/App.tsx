@@ -27,6 +27,7 @@ function App() {
                             dispatch(
                                 authActions.setUserType(snapshot.val().userType)
                             );
+                            localStorage.setItem("userId", user!.uid);
                         }
                     })
                     .catch((error) => {
